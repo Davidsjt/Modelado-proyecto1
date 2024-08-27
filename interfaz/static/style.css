@@ -1,0 +1,199 @@
+/* Estilos generales */
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+body {
+  background-color: rgb(128, 166, 206);
+  margin:auto;
+}
+
+.seccion-oscura {
+  color: black;
+  background-color: #133855;
+}
+
+
+.seccion-titulo {
+  font-size: 2rem;
+  padding: 15px 0;
+  font-family: 'Sigmar';
+}
+
+.seccion-descripcion {
+  font-size: 1.2rem;
+  color: #00203b;
+}
+
+
+/* Barra de navegacion */
+
+.navbar {
+  padding: 2rem;
+  background-color: rgb(128, 166, 206);
+}
+
+.navbar-collapse {
+  align-items: center;
+  justify-content: space-between;  
+}
+
+
+/* Idiomas */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  color: #FFFFFF;
+  background-color: #275271;
+}
+
+.dropdown button {
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  padding: 1.25em 2em;
+  margin: 10px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* Perfiles */
+
+.perfiles-recientes {
+  padding: 40px;
+}
+
+.perfiles-recientes img {
+  height: 90%;
+  width: 90%;
+  padding: 10px;
+  border-radius: 10px;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.perfiles-contenedor {
+  padding-top: 60px;
+  margin-bottom: 40px;
+}
+
+.overlay {
+  transition: all 0.2s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlay p {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.perfil {
+  position: relative;
+}
+
+.perfil:hover img {
+  opacity: 0.2;
+}
+
+.perfil:hover .overlay {
+  opacity: 1;
+}
+
+.overlay .iconos-contenedor {
+  display: flex;
+}
+
+.overlay i {
+  color: black;
+  font-size: 60px;
+  margin: 10px;
+}
+
+.perfil {
+  display: flex;
+  justify-content: center;
+}
+
+/* Pie de pagina (footer) */
+
+footer {
+  min-height: 50px;
+}
+
+.iconos-redes-sociales a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in;
+}
+
+.iconos-redes-sociales i {
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in;
+}
+
+.iconos-redes-sociales a:hover {
+  background-color: rgb(240, 234, 210);
+  border: 2px solid rgb(173, 193, 120);
+}
+
+.iconos-redes-sociales a:hover i {
+  color: black;
+}
+
+
+/* Adaptable (Responsivo) */
+
+@media screen and (max-width: 400px) {
+  .overlay p {
+    font-size: 18px;
+  }
+
+  .overlay i {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-brand {
+    display: none;
+  }
+}
