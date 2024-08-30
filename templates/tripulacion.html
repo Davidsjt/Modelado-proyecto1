@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Metadatos -->
+    <meta charset="utf-8">
+    <meta name="author" content="Daniela Rivera, David, Edson">
+    <meta name="description" content="App de clima para ciudades">
+    <meta name="keywords" content="HTML, CSS, Python, React, Bootstrap">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Titulo -->
+    <title>Clima AICM</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/imagenes/nubes.png">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">-->
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+  </head>
+    
+ <body>
+      <!-- Barra de navegacion -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse" id="navbar-toggler">
+            <a class="navbar-brand" href="#">
+              <img src="static/imagenes/aicm.png" width="400" fill="black">
+            </a>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="static/imagenes/idioma.png" width="50" alt="Cambio de idioma">
+              </a>
+              <div class="dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                <a href="#">English</a>
+                <a href="#">French</a>
+                <a href="#">Spanish</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Buscador/Input -->
+      <section class="buscador-input">
+        <h2 class="seccion-titulo texto-negro">Veamos el clima de su destino</h2>
+        <h3 class="seccion-descripcion">Por favor ingrese el código IATA.</h3>
+        <h3 class="seccion-descripcion"><br></h3>
+        <div class="buscador-input-container">
+            <input type="text" placeholder="Veamos la condición climática en..." tabindex="0">
+            <a class="search-icon" href="{{ url_for('climat') }}"></a>
+        </div>
+    </section>
+
+    
+
+    <!-- Pie de pagina (footer) -->
+    <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center"> 
+        <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
+          <a href="https://x.com/aicm_mx?s=11" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a href="https://www.instagram.com/aicm_mx?igsh=Z2RxenZucjQwaGg0" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com/share/njMKVqFQNWRqs77J/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="https://www.aicm.com.mx/aicm_en/contact" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-globe2"></i>
+          </a>
+          <a href="mailto:comentarios@aicm.com.mx" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-envelope"></i>
+          </a>
+        </div>
+    </footer>
+    
+</body>
+</html>
+   

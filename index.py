@@ -14,8 +14,10 @@ def tripulacion():
 def pasajeros():
     return render_template('pasajero.html')
 
+@app.route ('/tripulacion/clima')
+def climat():
+    return render_template('climat.html')
 
-#flask --app --debug run
-#export FLASK_APP=start
-#export FLASK_ENV=development
-#https://www.google.com/search?client=firefox-b-d&q=tutoriales+de+flask#fpstate=ive&vld=cid:506fc2ce,vid:W-SfC_V7P6o,st:0
+@app.route ('/pasajeros/clima')
+def climap():
+    return render_template('climap.html')
