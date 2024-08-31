@@ -16,8 +16,8 @@ def pasajeros():
 
 @app.route ('/tripulacion/clima')
 def climat():
-    return render_template('climat.html')
+    return render_template('clima.html')
 
 @app.route ('/pasajeros/clima')
 def climap():
-    return render_template('climap.html')
+    return render_template('climapa.html')
