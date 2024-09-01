@@ -24,27 +24,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
   </head>
     
- </head>
- <body>
-      <!-- Barra de navegacion -->
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <div class="collapse navbar-collapse" id="navbar-toggler">
-            <a class="navbar-brand" href="#">
-              <img src="/static/imagenes/aicm.png" width="400" fill="black">
-            </a>
-            <!-- Buscador/Input -->
-            <section class="buscador-input">
-                <h3 class="seccion-descripcion"><br></h3>
-                <div class="buscador-input-container">
-                    <input type="text" placeholder="¿Quieres consultar otra ciudad?" tabindex="0">
-                    <a class="search-icon" href=""></a>
-                </div>
-            </section>
+  <body>
+    <!-- Barra de navegacion -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse" id="navbar-toggler">
+          <a class="navbar-brand" href="#">
+            <img src="/static/imagenes/aicm.png" width="400" fill="black">
+          </a>
+          <!-- Buscador/Input -->
+          <section class="buscador-input">
+            <h3 class="seccion-descripcion"><br></h3>
+            <div class="buscador-input-container">
+              <input type="text" placeholder="¿Quieres consultar otra ciudad?" tabindex="0">
+              <a class="search-icon" href=""></a>
+            </div>
+          </section>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,47 +57,57 @@
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-      <!-- CLima -->
-     <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
-        <h2 class="seccion-titulo texto-negro">Clima en </h2>
-        <div class="container text-center perfiles-contenedor">
-          <div class="row">
-            <!-- Clima -->
-            <div class="col">
-              <div class="clima">
-                  <h3 class="seccion-descripcion">Clima</h3>
+    <!-- Clima -->
+    <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
+      <h2 class="seccion-titulo texto-negro">Clima en</h2>
+      <div class="container text-center perfiles-contenedor">
+        <div class="row">
+          <!-- Clima -->
+          <div class="col">
+            <div class="clima">
+              <h3 class="seccion-descripcion">Clima</h3>
+              <!-- Cuadro de texto para mostrar el clima -->
+              <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 150px;">
+                Aquí aparecerá la información del clima.
               </div>
             </div>
-            <!-- Recomendaciones -->
-            <div class="col">
-              <div class="recomendaciones">
-                <h3 class="seccion-descripcion">Recomendaciones</h3>
+          </div>
+          <!-- Recomendaciones -->
+          <div class="col">
+            <div class="recomendaciones">
+              <h3 class="seccion-descripcion">Recomendaciones</h3>
+              <!-- Cuadro de texto para mostrar las recomendaciones -->
+              <div id="cuadro-recomendaciones" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 150px;">
+                Aquí aparecerán las recomendaciones.
               </div>
+            </div>
+          </div>
         </div>
-     </section>
-  
+      </div>
+    </section>
 
-      <!-- Pie de pagina (footer) -->
-      <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center"> 
-        <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
-          <a href="https://x.com/aicm_mx?s=11" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-twitter-x"></i>
-          </a>
-          <a href="https://www.instagram.com/aicm_mx?igsh=Z2RxenZucjQwaGg0" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a href="https://www.facebook.com/share/njMKVqFQNWRqs77J/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="https://www.aicm.com.mx/aicm_en/contact" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-globe2"></i>
-          </a>
-          <a href="mailto:comentarios@aicm.com.mx" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-envelope"></i>
-          </a>
-        </div>
-      </footer>
- </body>
+    <!-- Pie de pagina (footer) -->
+    <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center"> 
+      <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
+        <a href="https://x.com/aicm_mx?s=11" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+        <a href="https://www.instagram.com/aicm_mx?igsh=Z2RxenZucjQwaGg0" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/share/njMKVqFQNWRqs77J/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.aicm.com.mx/aicm_en/contact" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-globe2"></i>
+        </a>
+        <a href="mailto:comentarios@aicm.com.mx" target="_blank" rel="noopener noreferrer">
+          <i class="bi bi-envelope"></i>
+        </a>
+      </div>
+    </footer>
+  </body>
 </html>
