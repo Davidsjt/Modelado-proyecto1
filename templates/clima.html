@@ -42,7 +42,7 @@
             <div class="buscador-input-container">
               <!-- Formulario para consultar otra ciudad -->
               <form action="{{ url_for('climat') }}" method="get">
-                <input type="text" name="iata_code" placeholder="¿Quieres consultar otra ciudad?" tabindex="0" required>
+                <input type="text" name="city_name" placeholder="¿Quieres consultar otra ciudad?" tabindex="0" required>
                 <button type="submit" class="search-icon btn btn-primary">Buscar</button>
               </form>
             </div>
@@ -65,7 +65,7 @@
 
 <!-- Clima -->
 <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
-  <h2 class="seccion-titulo texto-negro">Clima en {{ iata_code }}</h2>
+  <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
   <div class="container text-center perfiles-contenedor">
     <div class="row">
       <!-- Clima -->
