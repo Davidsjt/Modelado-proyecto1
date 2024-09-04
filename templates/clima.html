@@ -63,44 +63,54 @@
       </div>
     </nav>
 
-    <!-- Clima -->
-    <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
-      <h2 class="seccion-titulo texto-negro">Clima en {{ iata_code }}</h2>
-      <div class="container text-center perfiles-contenedor">
-        <div class="row">
-          <!-- Clima -->
-          <div class="col">
-            <div class="clima">
-              <h3 class="seccion-descripcion">Clima</h3>
-              <!-- Cuadro de texto para mostrar el clima -->
-              <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
-                {% if weather_data %}
-                  {% if weather_data == "Ciudad no encontrada" %}
-                    <p>{{ weather_data }}</p>
-                  {% else %}
-                    <p>Temperatura: {{ weather_data.temperature }}</p>
-                    <p>Presión: {{ weather_data.pressure }}</p>
-                    <p>Humedad: {{ weather_data.humidity }}</p>
-                    <p>Descripción: {{ weather_data.description }}</p>
-                  {% endif %}
-                {% else %}
-                  Aquí aparecerá la información del clima.
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          <!-- Recomendaciones -->
-          <div class="col">
-            <div class="recomendaciones">
-              <h3 class="seccion-descripcion">Recomendaciones</h3>
-              <!-- Cuadro de texto para mostrar las recomendaciones -->
-              <div id="cuadro-recomendaciones" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
-                Aquí aparecerán las recomendaciones.
-              </div>
-            </div>
+<!-- Clima -->
+<section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
+  <h2 class="seccion-titulo texto-negro">Clima en {{ iata_code }}</h2>
+  <div class="container text-center perfiles-contenedor">
+    <div class="row">
+      <!-- Clima -->
+      <div class="col">
+        <div class="clima">
+          <h3 class="seccion-descripcion">Clima</h3>
+          <!-- Cuadro de texto para mostrar el clima -->
+          <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
+            {% if weather_data %}
+              {% if weather_data == "Ciudad no encontrada" %}
+                <p>{{ weather_data }}</p>
+              {% else %}
+                <p>Temperatura: {{ weather_data.temperature }}</p>
+                <p>Presión: {{ weather_data.pressure }}</p>
+                <p>Humedad: {{ weather_data.humidity }}</p>
+                <p>Descripción: {{ weather_data.description }}</p>
+              {% endif %}
+            {% else %}
+              Aquí aparecerá la información del clima.
+            {% endif %}
           </div>
         </div>
       </div>
+
+      <!-- Recomendaciones -->
+      <div class="col">
+        <div class="recomendaciones">
+          <h3 class="seccion-descripcion">Recomendaciones</h3>
+          <div id="cuadro-recomendaciones" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
+            {% if wikidata_results %}
+              <ul>
+                {% for item in wikidata_results %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              Aquí aparecerán las recomendaciones.
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
     </section>
 
     <!-- Pie de página (footer) -->
@@ -125,3 +135,4 @@
     </footer>
   </body>
 </html>
+

@@ -1,67 +1,32 @@
+# weather.py
 import requests
 
-# Enter your API key here
+# Tu clave de API de OpenWeather
 api_key = "cc8f7bbf129d916c4b40ad83b402512d"
 
-# base_url variable to store url
-base_url = "http://api.openweathermap.org/data/2.5/weather?"
+def obtener_clima(iata_code):
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    complete_url = base_url + "appid=" + api_key + "&q=" + iata_code + "&lang=es"
 
-# Give city name
-city_name = input("Ingresa el nombre de la ciudad: ")
+    response = requests.get(complete_url)
+    x = response.json()
 
-# complete_url variable to store
-# complete url address
-complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&lang=es"
+    if x["cod"] != "404":
+        y = x["main"]
+        current_temperature_celsius = y["temp"] - 273.15
+        current_pressure = y["pressure"]
+        current_humidity = y["humidity"]
+        z = x["weather"]
+        weather_description = z[0]["description"]
 
-# get method of requests module
-# return response object
-response = requests.get(complete_url)
-
-# json method of response object 
-# convert json format data into
-# python format data
-x = response.json()
-
-# Now x contains list of nested dictionaries
-# Check the value of "cod" key is equal to
-# "404", means city is found otherwise,
-# city is not found
-if x["cod"] != "404":
-
-    # store the value of "main"
-    # key in variable y
-    y = x["main"]
-
-    # store the value corresponding
-    # to the "temp" key of y
-    current_temperature_kelvin = y["temp"]
-    current_temperature_celsius = current_temperature_kelvin - 273.15
-
-    # store the value corresponding
-    # to the "pressure" key of y
-    current_pressure = y["pressure"]
-
-    # store the value corresponding
-    # to the "humidity" key of y
-    current_humidity = y["humidity"]
-
-    # store the value of "weather"
-    # key in variable z
-    z = x["weather"]
-
-    # store the value corresponding 
-    # to the "description" key at 
-    # the 0th index of z
-    weather_description = z[0]["description"]
-
-    # print following values
-    print(f"Temperatura actual (en Celsius) = {current_temperature_celsius:.2f}°C")
-    print(f"Presión atmosférica (en hPa) = {current_pressure}")
-    print(f"Humedad (en porcentaje) = {current_humidity}")
-    print(f"Descripción = {weather_description.capitalize()}")
-
-else:
-    print("Ciudad no encontrada")
-
-
+        weather_data = {
+            "temperature": f"{current_temperature_celsius:.2f}°C",
+            "pressure": f"{current_pressure} hPa",
+            "humidity": f"{current_humidity}%",
+            "description": weather_description.capitalize()
+        }
+    else:
+        weather_data = "Ciudad no encontrada"
+    
+    return weather_data
 
