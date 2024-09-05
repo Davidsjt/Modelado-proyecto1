@@ -63,25 +63,33 @@
       </div>
     </nav>
 
-<!-- Clima -->
+<!-- Clima y Wikidata en columnas -->
 <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
   <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
   <div class="container text-center perfiles-contenedor">
     <div class="row">
-      <!-- Clima -->
-      <div class="col">
+      <!-- Columna de Clima (Izquierda) -->
+      <div class="col-md-6">
         <div class="clima">
           <h3 class="seccion-descripcion">Clima</h3>
-          <!-- Cuadro de texto para mostrar el clima -->
           <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
             {% if weather_data %}
               {% if weather_data == "Ciudad no encontrada" %}
                 <p>{{ weather_data }}</p>
               {% else %}
-                <p>Temperatura: {{ weather_data.temperature }}</p>
-                <p>Presión: {{ weather_data.pressure }}</p>
-                <p>Humedad: {{ weather_data.humidity }}</p>
-                <p>Descripción: {{ weather_data.description }}</p>
+                 <p><strong>País:</strong> {{ weather_data.country }}</p>
+                <p><strong>Temperatura:</strong> {{ weather_data.temperature }}</p>
+                <p><strong>Sensación térmica:</strong> {{ weather_data.feels_like }}</p>
+                <p><strong>Temperatura mínima:</strong> {{ weather_data.temp_min }}</p>
+                <p><strong>Temperatura máxima:</strong> {{ weather_data.temp_max }}</p>
+                <p><strong>Presión:</strong> {{ weather_data.pressure }}</p>
+                <p><strong>Humedad:</strong> {{ weather_data.humidity }}</p>
+                <p><strong>Descripción:</strong> {{ weather_data.description }}</p>
+                <p><strong>Viento:</strong> {{ weather_data.wind_speed }} dirección {{ weather_data.wind_deg }}</p>
+                <p><strong>Visibilidad:</strong> {{ weather_data.visibility }}</p>
+                <p><strong>Nubosidad:</strong> {{ weather_data.cloudiness }}</p>
+                <p><strong>Amanecer:</strong> {{ weather_data.sunrise }} UTC</p>
+                <p><strong>Anochecer:</strong> {{ weather_data.sunset }} UTC</p>
               {% endif %}
             {% else %}
               Aquí aparecerá la información del clima.
@@ -89,19 +97,24 @@
           </div>
         </div>
       </div>
-<!-- Recomendaciones -->
-<div class="col">
-    <div class="recomendaciones">
-        <h3 class="seccion-descripcion">Datos de Wikidata</h3>
-        <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px; overflow-y: auto;">
+
+      <!-- Columna de Datos de Wikidata (Derecha) -->
+      <div class="col-md-6">
+        <div class="recomendaciones">
+          <h3 class="seccion-descripcion">Datos de Wikidata</h3>
+          <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px; overflow-y: auto;">
             {% if wikidata_results %}
-                <p>{{ wikidata_results }}</p>
+              <p>{{ wikidata_results | replace('\n', '<br>') | safe }}</p>
             {% else %}
-                Aquí aparecerán los datos de Wikidata.
+              Aquí aparecerán los datos de Wikidata.
             {% endif %}
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
+
 
 </section>
 
