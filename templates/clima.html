@@ -25,7 +25,7 @@
   </head>
     
   <body>
-    <!-- Barra de navegacion -->
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="#"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,8 +40,11 @@
           <section class="buscador-input">
             <h3 class="seccion-descripcion"><br></h3>
             <div class="buscador-input-container">
-              <input type="text" placeholder="¿Quieres consultar otra ciudad?" tabindex="0">
-              <a class="search-icon" href=""></a>
+              <!-- Formulario para consultar otra ciudad -->
+              <form action="{{ url_for('climat') }}" method="get">
+                <input type="text" name="city_name" placeholder="¿Quieres consultar otra ciudad?" tabindex="0" required>
+                <button type="submit" class="search-icon btn btn-primary">Buscar</button>
+              </form>
             </div>
           </section>
           <ul class="navbar-nav">
@@ -60,36 +63,64 @@
       </div>
     </nav>
 
-    <!-- Clima -->
-    <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
-      <h2 class="seccion-titulo texto-negro">Clima en</h2>
-      <div class="container text-center perfiles-contenedor">
-        <div class="row">
-          <!-- Clima -->
-          <div class="col">
-            <div class="clima">
-              <h3 class="seccion-descripcion">Clima</h3>
-              <!-- Cuadro de texto para mostrar el clima -->
-              <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 150px;">
-                Aquí aparecerá la información del clima.
-              </div>
-            </div>
-          </div>
-          <!-- Recomendaciones -->
-          <div class="col">
-            <div class="recomendaciones">
-              <h3 class="seccion-descripcion">Recomendaciones</h3>
-              <!-- Cuadro de texto para mostrar las recomendaciones -->
-              <div id="cuadro-recomendaciones" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 150px;">
-                Aquí aparecerán las recomendaciones.
-              </div>
-            </div>
+<!-- Clima y Wikidata en columnas -->
+<section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
+  <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
+  <div class="container text-center perfiles-contenedor">
+    <div class="row">
+      <!-- Columna de Clima (Izquierda) -->
+      <div class="col-md-6">
+        <div class="clima">
+          <h3 class="seccion-descripcion">Clima</h3>
+          <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
+            {% if weather_data %}
+              {% if weather_data == "Ciudad no encontrada" %}
+                <p>{{ weather_data }}</p>
+              {% else %}
+                 <p><strong>País:</strong> {{ weather_data.country }}</p>
+                <p><strong>Temperatura:</strong> {{ weather_data.temperature }}</p>
+                <p><strong>Sensación térmica:</strong> {{ weather_data.feels_like }}</p>
+                <p><strong>Temperatura mínima:</strong> {{ weather_data.temp_min }}</p>
+                <p><strong>Temperatura máxima:</strong> {{ weather_data.temp_max }}</p>
+                <p><strong>Presión:</strong> {{ weather_data.pressure }}</p>
+                <p><strong>Humedad:</strong> {{ weather_data.humidity }}</p>
+                <p><strong>Descripción:</strong> {{ weather_data.description }}</p>
+                <p><strong>Viento:</strong> {{ weather_data.wind_speed }} dirección {{ weather_data.wind_deg }}</p>
+                <p><strong>Visibilidad:</strong> {{ weather_data.visibility }}</p>
+                <p><strong>Nubosidad:</strong> {{ weather_data.cloudiness }}</p>
+                <p><strong>Amanecer:</strong> {{ weather_data.sunrise }} UTC</p>
+                <p><strong>Anochecer:</strong> {{ weather_data.sunset }} UTC</p>
+              {% endif %}
+            {% else %}
+              Aquí aparecerá la información del clima.
+            {% endif %}
           </div>
         </div>
       </div>
+
+      <!-- Columna de Datos de Wikidata (Derecha) -->
+      <div class="col-md-6">
+        <div class="recomendaciones">
+          <h3 class="seccion-descripcion">Datos de Wikidata</h3>
+          <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; overflow-y: auto;">
+            {% if wikidata_results %}
+              <p>{{ wikidata_results | replace('\n', '<br>') | safe }}</p>
+            {% else %}
+              Aquí aparecerán los datos de Wikidata.
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</section>
+
     </section>
 
-    <!-- Pie de pagina (footer) -->
+    <!-- Pie de página (footer) -->
     <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center"> 
       <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
         <a href="https://x.com/aicm_mx?s=11" target="_blank" rel="noopener noreferrer">
@@ -111,3 +142,4 @@
     </footer>
   </body>
 </html>
+

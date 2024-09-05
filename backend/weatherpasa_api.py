@@ -5,7 +5,7 @@ from datetime import datetime
 # Tu clave de API de OpenWeather
 api_key = "cc8f7bbf129d916c4b40ad83b402512d"
 
-def obtener_clima(iata_code):
+def obtener_clima_pasajeros(iata_code):
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = base_url + "appid=" + api_key + "&q=" + iata_code + "&lang=es"
 
@@ -55,7 +55,7 @@ def obtener_clima(iata_code):
         lon = coord.get("lon", "N/A")
         lat = coord.get("lat", "N/A")
 
-        weather_data = {
+        weather_data_pasajeros = {
             "temperature": f"{current_temperature_celsius:.2f}°C",
             "feels_like": f"{feels_like_celsius:.2f}°C",
             "temp_min": f"{temp_min_celsius:.2f}°C",
@@ -74,8 +74,6 @@ def obtener_clima(iata_code):
             "latitude": lat
         }
     else:
-        weather_data = "Ciudad no encontrada"
+        weather_data_pasajeros = "Ciudad no encontrada"
     
-    return weather_data
-
-
+    return weather_data_pasajeros

@@ -1,4 +1,8 @@
 from flask import Flask, request, render_template
+from backend.weather_api import obtener_clima
+from backend.data_api import query_wikidata
+from backend.weatherpasa_api import obtener_clima_pasajeros
+from backend.datapasa_api import query_wikidata_pasajeros
 
 app = Flask(__name__)
 
@@ -16,27 +20,58 @@ def pasajeros():
 
 @app.route('/tripulacion/clima', methods=['GET'])
 def climat():
-    iata_code = request.args.get('iata_code')  # Obtener el valor del parámetro 'iata_code'
-    if iata_code:
-        # Aquí puedes procesar el código IATA y realizar la búsqueda del clima
-        # Por ejemplo, podrías hacer una solicitud a la API de clima
-        # Y luego pasar los datos a una plantilla para mostrarlos
-        # Por ahora solo muestra el código recibido
-        return render_template('clima.html', iata_code=iata_code)  # Pasar el código IATA a la plantilla
-    else:
-        return render_template('clima.html', error='No se ha ingresado ningún código IATA')
+    city_name = request.args.get('city_name')
 
-@app.route('/pasajeros/clima', methods=['GET'])
+    print(f"Received city_name: {city_name}")
+
+    if not city_name:
+        return render_template('clima.html', weather_data=None, city_name=None, wikidata_results=None)
+
+    # Obtener el clima usando el nombre de la ciudad
+    weather_data = obtener_clima(city_name)
+    
+    # Obtener los datos de Wikidata utilizando el nombre de la ciudad
+    wikidata_results = query_wikidata(city_name)
+
+    print(f"Wikidata Results: {wikidata_results}")
+    print(f"Weather Data: {weather_data}")
+
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=wikidata_results)
+
+
+
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('clima.html', weather_data=weather_data, city_name=city_name, curiosities=curiosities)
+
+
+
+    
+@app.route('/pasajeros/climapa', methods=['GET'])
 def climap():
-    iata_code = request.args.get('iata_code')  # Obtener el valor del parámetro 'iata_code'
-    if iata_code:
-        # Aquí puedes procesar el código IATA y realizar la búsqueda del clima
-        # Por ejemplo, podrías hacer una solicitud a la API de clima
-        # Y luego pasar los datos a una plantilla para mostrarlos
-        # Por ahora solo muestra el código recibido
-        return render_template('climapa.html', iata_code=iata_code)  # Pasar el código IATA a la plantilla
-    else:
-        return render_template('climapa.html', error='No se ha ingresado ningún código IATA')
+    city_name = request.args.get('city_name')
+
+    print(f"Received city_name: {city_name}")
+
+    if not city_name:
+        return render_template('climapa.html', weather_data_pasajeros=None, city_name=None, wikidata_results_pasajeros=None)
+
+    # Obtener el clima usando el nombre de la ciudad
+    weather_data_pasajeros = obtener_clima_pasajeros(city_name)
+    
+    # Obtener los datos de Wikidata utilizando el nombre de la ciudad
+    wikidata_results_pasajeros = query_wikidata_pasajeros(city_name)
+
+    print(f"Wikidata Results: {wikidata_results_pasajeros}")
+    print(f"Weather Data: {weather_data_pasajeros}")
+
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, wikidata_results_pasajeros=wikidata_results_pasajeros)
+
+
+
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, curiosities_pasajeros=curiosities_pasajeros)
 
 if __name__ == '__main__':
     app.run(debug=True)
