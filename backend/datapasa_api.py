@@ -1,7 +1,7 @@
 import requests
 
 # Función para realizar la consulta a Wikidata
-def query_wikidata(city_or_iata):
+def query_wikidata_pasajeros(city_or_iata):
     url = 'https://query.wikidata.org/sparql'
     headers = {'Accept': 'application/sparql-results+json'}
     
@@ -82,7 +82,7 @@ def format_city_data(data):
             # Información de aeropuertos, accidentes aéreos, curiosidades, sitios históricos, etc.
             airports = []
             incidents = []
-            curiosities = []
+            curiosities_pasajeros = []
             historical_sites = []
             tourist_attractions = []
             events = []
@@ -102,10 +102,10 @@ def format_city_data(data):
                     events.append(f"Evento: {event_label}")
 
             # Limitar a un máximo de 5 eventos
-            events = events[:5]
+            events = events[:1]
 
-            if not curiosities:
-                curiosities = ["Sin datos curiosos disponibles"]
+            if not curiosities_pasajeros:
+                curiosities_pasajeros = ["Sin datos curiosos disponibles"]
             if not airports:
                 airports = ["No se encontraron aeropuertos relevantes."]
             if not incidents:
@@ -116,7 +116,6 @@ def format_city_data(data):
             altitude = city_info.get('altitude', {}).get('value', 'N/A')
 
             output = (
-                f"Ciudad: {city_label}\n"
                 f"País: {country_label}\n"
                 f"Población: {population}\n"
                 f"Descripción: {description}\n"

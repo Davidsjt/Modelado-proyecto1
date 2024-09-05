@@ -116,14 +116,13 @@ def format_city_data(data):
             altitude = city_info.get('altitude', {}).get('value', 'N/A')
 
             output = (
-                f"Ciudad: {city_label}\n"
                 f"País: {country_label}\n"
                 f"Población: {population}\n"
                 f"Descripción: {description}\n"
                 f"Altitud: {altitude} metros\n\n"
                 f"Aeropuertos:\n" + "\n".join(airports) + "\n\n"
                 f"Accidentes Aéreos:\n" + "\n".join(incidents) + "\n\n"
-                f"Eventos Relevantes:\n" + "\n".join(events)
+
             )
             return output
     return "No se encontraron datos para la ciudad especificada."
