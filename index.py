@@ -31,20 +31,20 @@ def climat():
     # Obtener los datos de Wikidata utilizando el nombre de la ciudad
     wikidata_results = query_wikidata(city_name)
 
-    # Procesar los resultados de Wikidata
-    curiosities = []
-    if wikidata_results and 'results' in wikidata_results and wikidata_results['results']['bindings']:
-        for result in wikidata_results['results']['bindings']:
-            curiosity = result.get('curiosityLabel', {}).get('value', None)
-            curiosity_desc = result.get('curiosityDescription', {}).get('value', 'No hay descripción disponible.')
-            if curiosity:
-                curiosities.append(f"{curiosity}: {curiosity_desc}")
-
+    print(f"Wikidata Results: {wikidata_results}")
     print(f"Weather Data: {weather_data}")
-    print(f"Curiosities: {curiosities}")
 
-    return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=curiosities)
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=wikidata_results)
 
+
+
+    # Renderizar la plantilla con los datos obtenidos
+    return render_template('clima.html', weather_data=weather_data, city_name=city_name, curiosities=curiosities)
+
+
+
+    
 @app.route('/pasajeros/clima', methods=['GET'])
 def climap():
     city_name = request.args.get('city_name')
@@ -63,4 +63,5 @@ def climap():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
