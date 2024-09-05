@@ -26,28 +26,25 @@
     
  </head>
  <body>
-     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <div class="collapse navbar-collapse" id="navbar-toggler">
-          <a class="navbar-brand" href="#">
-            <img src="/static/imagenes/aicm.png" width="400" fill="black">
-          </a>
-          <!-- Buscador/Input -->
-          <section class="buscador-input">
-            <h3 class="seccion-descripcion"><br></h3>
-            <div class="buscador-input-container">
-              <!-- Formulario para consultar otra ciudad -->
-              <form action="{{ url_for('climat') }}" method="get">
-                <input type="text" name="city_name" placeholder="¿Quieres consultar otra ciudad?" tabindex="0" required>
-                <button type="submit" class="search-icon btn btn-primary">Buscar</button>
-              </form>
-            </div>
-          </section>
+      <!-- Barra de navegacion -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse" id="navbar-toggler">
+            <a class="navbar-brand" href="https://www.aicm.com.mx/">
+              <img src="/static/imagenes/aicm.png" width="400" fill="black">
+            </a>
+            <!-- Buscador/Input -->
+            <section class="buscador-input">
+                <h3 class="seccion-descripcion"><br></h3>
+                <div class="buscador-input-container">
+                    <input type="text" placeholder="¿Quieres consultar otra ciudad?" tabindex="0">
+                    <a class="search-icon" href=""></a>
+                </div>
+            </section>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
