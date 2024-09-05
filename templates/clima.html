@@ -89,26 +89,20 @@
           </div>
         </div>
       </div>
-
-      <!-- Recomendaciones -->
-      <div class="col">
-        <div class="recomendaciones">
-          <h3 class="seccion-descripcion">Recomendaciones</h3>
-          <div id="cuadro-recomendaciones" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
+<!-- Recomendaciones -->
+<div class="col">
+    <div class="recomendaciones">
+        <h3 class="seccion-descripcion">Datos de Wikidata</h3>
+        <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px; overflow-y: auto;">
             {% if wikidata_results %}
-              <ul>
-                {% for item in wikidata_results %}
-                  <li>{{ item }}</li>
-                {% endfor %}
-              </ul>
+                <p>{{ wikidata_results }}</p>
             {% else %}
-              Aquí aparecerán las recomendaciones.
+                Aquí aparecerán los datos de Wikidata.
             {% endif %}
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
 </section>
 
     </section>
