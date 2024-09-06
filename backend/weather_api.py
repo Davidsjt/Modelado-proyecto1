@@ -25,7 +25,7 @@ def obtener_clima(iata_code):
 
         # Obtener el código del icono del clima
         weather_icon_code = z[0]["icon"]
-        weather_icon_url = f"http://openweathermap.org/img/wn/{weather_icon_code}@2x.png"
+        weather_icon_url = f"http://openweathermap.org/img/wn/{weather_icon_code}@4x.png"
 
         # Obtener datos del viento
         wind = x.get("wind", {})
