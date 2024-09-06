@@ -1,4 +1,3 @@
-# weather.py
 import requests
 from datetime import datetime
 
@@ -23,6 +22,10 @@ def obtener_clima_pasajeros(iata_code):
         
         z = x["weather"]
         weather_description = z[0]["description"]
+        
+        # Obtener el ícono del clima
+        weather_icon = z[0]["icon"]
+        icon_url = f"http://openweathermap.org/img/wn/{weather_icon}.png"
 
         # Obtener datos del viento
         wind = x.get("wind", {})
@@ -63,6 +66,7 @@ def obtener_clima_pasajeros(iata_code):
             "pressure": f"{current_pressure} hPa",
             "humidity": f"{current_humidity}%",
             "description": weather_description.capitalize(),
+            "icon_url": icon_url,  # Añadimos la URL del ícono
             "wind_speed": f"{wind_speed} m/s",
             "wind_deg": f"{wind_deg}°",
             "visibility": f"{visibility} m" if visibility != "N/A" else "N/A",

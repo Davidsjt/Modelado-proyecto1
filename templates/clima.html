@@ -69,7 +69,7 @@
   <div class="container text-center perfiles-contenedor">
     <div class="row">
       <!-- Columna de Clima (Izquierda) -->
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="clima">
           <h3 class="seccion-descripcion">Clima</h3>
           <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
@@ -77,7 +77,7 @@
               {% if weather_data == "Ciudad no encontrada" %}
                 <p>{{ weather_data }}</p>
               {% else %}
-                 <p><strong>País:</strong> {{ weather_data.country }}</p>
+                <p><strong>País:</strong> {{ weather_data.country }}</p>
                 <p><strong>Temperatura:</strong> {{ weather_data.temperature }}</p>
                 <p><strong>Sensación térmica:</strong> {{ weather_data.feels_like }}</p>
                 <p><strong>Temperatura mínima:</strong> {{ weather_data.temp_min }}</p>
@@ -90,6 +90,9 @@
                 <p><strong>Nubosidad:</strong> {{ weather_data.cloudiness }}</p>
                 <p><strong>Amanecer:</strong> {{ weather_data.sunrise }} UTC</p>
                 <p><strong>Anochecer:</strong> {{ weather_data.sunset }} UTC</p>
+                
+                <!-- Mostrar ícono del clima -->
+                <p><strong>Icono del clima:</strong> <img src="{{ weather_data.icon_url }}" alt="Icono del clima"></p>
               {% endif %}
             {% else %}
               Aquí aparecerá la información del clima.
@@ -98,22 +101,7 @@
         </div>
       </div>
 
-      <!-- Columna de Datos de Wikidata (Derecha) -->
-      <div class="col-md-6">
-        <div class="recomendaciones">
-          <h3 class="seccion-descripcion">Datos de Wikidata</h3>
-          <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; overflow-y: auto;">
-            {% if wikidata_results %}
-              <p>{{ wikidata_results | replace('\n', '<br>') | safe }}</p>
-            {% else %}
-              Aquí aparecerán los datos de Wikidata.
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 </section>

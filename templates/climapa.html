@@ -61,13 +61,13 @@
       </div>
     </nav>
 
-     <!-- Clima y Wikidata en columnas -->
+<!-- Clima en columnas -->
 <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
   <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
   <div class="container text-center perfiles-contenedor">
     <div class="row">
       <!-- Columna de Clima (Izquierda) -->
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="clima">
           <h3 class="seccion-descripcion">Clima</h3>
           <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
@@ -75,14 +75,15 @@
               {% if weather_data_pasajeros == "Ciudad no encontrada" %}
                 <p>{{ weather_data_pasajeros }}</p>
               {% else %}
-                 <p><strong>País:</strong> {{ weather_data_pasajeros.country }}</p>
+                <p><strong>País:</strong> {{ weather_data_pasajeros.country }}</p>
                 <p><strong>Temperatura:</strong> {{ weather_data_pasajeros.temperature }}</p>
                 <p><strong>Sensación térmica:</strong> {{ weather_data_pasajeros.feels_like }}</p>
                 <p><strong>Temperatura mínima:</strong> {{ weather_data_pasajeros.temp_min }}</p>
                 <p><strong>Temperatura máxima:</strong> {{ weather_data_pasajeros.temp_max }}</p>
                 <p><strong>Presión:</strong> {{ weather_data_pasajeros.pressure }}</p>
                 <p><strong>Descripción:</strong> {{ weather_data_pasajeros.description }}</p>
-    
+                <!-- Mostrar el ícono del clima -->
+                <p><strong>Icono del clima:</strong> <img src="{{ weather_data_pasajeros.icon_url }}" alt="Icono del clima"></p>
               {% endif %}
             {% else %}
               Aquí aparecerá la información del clima.
@@ -90,23 +91,11 @@
           </div>
         </div>
       </div>
-
-      <!-- Columna de Datos de Wikidata (Derecha) -->
-      <div class="col-md-6">
-        <div class="recomendaciones">
-          <h3 class="seccion-descripcion">Datos de Wikidata</h3>
-          <div id="cuadro-wikidata" style="border: 1px solid #000; padding: 10px; margin-top: 20px; overflow-y: auto;">
-            {% if wikidata_results_pasajeros %}
-              <p>{{ wikidata_results_pasajeros | replace('\n', '<br>') | safe }}</p>
-            {% else %}
-              Aquí aparecerán los datos de Wikidata.
-            {% endif %}
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
+
+
   
 
       <!-- Pie de pagina (footer) -->
