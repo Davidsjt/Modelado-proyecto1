@@ -3,20 +3,18 @@ from rapidfuzz import process
 
 def load_iata_data(file_path):
     """
-    Loads IATA code and city data from a CSV file.
+    Carga los datos de codigos IATA y nombre de ciudades.
     
     Args:
-        file_path (str): The path to the CSV file containing IATA codes and city names.
+        file_path (str): El directorio donde se encuentra el archivo.
 
     Returns:
-        dict: A dictionary mapping IATA codes to city names.
-        list: A list of unique city names for fuzzy matching.
+        dict: Diccionario que mapea los IATA con los nombres de las ciudades.
+        list: Lista de nombres ocupados para corregir errores ortograficos.
     """
     df = pd.read_csv(file_path, encoding='utf-8')
     iata_to_city = {row['Code']: row['City'] for _, row in df.iterrows()}
     valid_cities = set(df['City'].unique())
-
-    # print("IATA to City Map:", iata_to_city)
 
     return iata_to_city, valid_cities
 
@@ -52,20 +50,18 @@ def get_closest_city_name(user_input, city_list):
 
 def hex_to_iata(hex_string, iata_to_city):
     """
-    Converts a hexadecimal string to an IATA code and maps it to a city name.
+    Convierte una cadena hexadecimal (correspondiente al ticket) en codigo IATA.
 
     Args:
-        hex_string (str): The hexadecimal representation of an IATA code.
-        iata_to_city (dict): The dictionary mapping IATA codes to city names.
+        hex_string (str): El ticket como cadena hexadecimal.
+        iata_to_city (dict): El diccionario de codigos IATA
 
     Returns:
-        str or None: The city name if the conversion and mapping are successful, otherwise None.
+        str or None: El codigo IATA en caso de ser un ticket válido, o None si no.
     """
     try:
         # Convert hex to IATA code
         iata_code = bytes.fromhex(hex_string).decode('utf-8')
-        print(f"Decoded IATA Code from hex {hex_string}: {iata_code}")  # Debug print
         return iata_code
     except ValueError:
-        print(f"Failed to decode hex {hex_string}")
         return None

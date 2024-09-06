@@ -25,8 +25,6 @@ def pasajeros():
 def climat():
     city_name = request.args.get('city_name')
 
-    print(f"Received city_name: {city_name}")
-
     if not city_name:
         return render_template('clima.html', weather_data=None, city_name=None, wikidata_results=None)
 
@@ -41,50 +39,38 @@ def climat():
         else:
             city_name = get_closest_city_name(city_name, valid_cities)            
 
-    # Obtener el clima usando el nombre de la ciudad
     weather_data = obtener_clima(city_name)
     
-    # Obtener los datos de Wikidata utilizando el nombre de la ciudad
     wikidata_results = query_wikidata(city_name)
 
-    print(f"Wikidata Results: {wikidata_results}")
-    print(f"Weather Data: {weather_data}")
-
-    # Renderizar la plantilla con los datos obtenidos
     return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=wikidata_results)
 
-
-
-    # Renderizar la plantilla con los datos obtenidos
     return render_template('clima.html', weather_data=weather_data, city_name=city_name, curiosities=curiosities)
 
-
-
-    
 @app.route('/pasajeros/climapa', methods=['GET'])
 def climap():
     city_name = request.args.get('city_name')
 
-    print(f"Received city_name: {city_name}")
-
     if not city_name:
         return render_template('climapa.html', weather_data_pasajeros=None, city_name=None, wikidata_results_pasajeros=None)
 
-    # Obtener el clima usando el nombre de la ciudad
+    hex_city_iata = hex_to_iata(city_name, iata_to_city)
+    if hex_city_iata:
+        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
+
+    else:
+        mapped_city = map_iata_to_city(city_name, iata_to_city)
+        if mapped_city:
+            city_name = mapped_city
+        else:
+            city_name = get_closest_city_name(city_name, valid_cities)     
+
     weather_data_pasajeros = obtener_clima_pasajeros(city_name)
     
-    # Obtener los datos de Wikidata utilizando el nombre de la ciudad
     wikidata_results_pasajeros = query_wikidata_pasajeros(city_name)
 
-    print(f"Wikidata Results: {wikidata_results_pasajeros}")
-    print(f"Weather Data: {weather_data_pasajeros}")
-
-    # Renderizar la plantilla con los datos obtenidos
     return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, wikidata_results_pasajeros=wikidata_results_pasajeros)
 
-
-
-    # Renderizar la plantilla con los datos obtenidos
     return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, curiosities_pasajeros=curiosities_pasajeros)
 
 if __name__ == '__main__':
