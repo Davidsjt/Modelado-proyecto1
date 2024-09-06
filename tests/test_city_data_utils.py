@@ -25,8 +25,10 @@ class TestCityDataUtils(unittest.TestCase):
     def test_hex_to_iata(self):
         for index, row in self.sample_data.iterrows():
             expected_city = row['destination']
+            print(f"Expected city is: {expected_city}")
             hex_ticket = row['ticket'].replace(" ", "")  # Remove any spaces if present
             actual_city = hex_to_iata(hex_ticket, self.iata_to_city)
+            print(f"Actual city is: {actual_city}")
             self.assertEqual(actual_city, expected_city, f"Failed for ticket: {hex_ticket}")
         self.assertIsNone(hex_to_iata('4a464', self.iata_to_city))  # Incomplete hex code should return None
 

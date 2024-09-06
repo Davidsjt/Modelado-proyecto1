@@ -65,7 +65,7 @@ def hex_to_iata(hex_string, iata_to_city):
         # Convert hex to IATA code
         iata_code = bytes.fromhex(hex_string).decode('utf-8')
         print(f"Decoded IATA Code from hex {hex_string}: {iata_code}")  # Debug print
-        return iata_to_city.get(iata_code)
+        return iata_code
     except ValueError:
         print(f"Failed to decode hex {hex_string}")
         return None

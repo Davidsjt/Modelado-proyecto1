@@ -30,9 +30,9 @@ def climat():
     if not city_name:
         return render_template('clima.html', weather_data=None, city_name=None, wikidata_results=None)
 
-    hex_city_name = hex_to_iata(city_name, iata_to_city)
-    if hex_city_name:
-        city_name = hex_city_name
+    hex_city_iata = hex_to_iata(city_name, iata_to_city)
+    if hex_city_iata:
+        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
 
     else:
         mapped_city = map_iata_to_city(city_name, iata_to_city)
