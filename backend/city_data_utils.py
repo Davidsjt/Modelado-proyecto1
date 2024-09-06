@@ -12,12 +12,12 @@ def load_iata_data(file_path):
         dict: A dictionary mapping IATA codes to city names.
         list: A list of unique city names for fuzzy matching.
     """
-    # Load the CSV into a DataFrame
-    df = pd.read_csv(file_path)
-    # Create a dictionary with IATA Code as keys and City names as values
-    iata_to_city = pd.Series(df.City.values, index=df.Code).to_dict()
-    # Create a list of unique city names for fuzzy matching
-    valid_cities = df['City'].unique().tolist()
+    df = pd.read_csv(file_path, encoding='utf-8')
+    iata_to_city = {row['Code']: row['City'] for _, row in df.iterrows()}
+    valid_cities = set(df['City'].unique())
+
+    # print("IATA to City Map:", iata_to_city)
+
     return iata_to_city, valid_cities
 
 def map_iata_to_city(iata_code, iata_to_city):
@@ -64,6 +64,8 @@ def hex_to_iata(hex_string, iata_to_city):
     try:
         # Convert hex to IATA code
         iata_code = bytes.fromhex(hex_string).decode('utf-8')
-        return map_iata_to_city(iata_code, iata_to_city)
+        print(f"Decoded IATA Code from hex {hex_string}: {iata_code}")  # Debug print
+        return iata_to_city.get(iata_code)
     except ValueError:
+        print(f"Failed to decode hex {hex_string}")
         return None
