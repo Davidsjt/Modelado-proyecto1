@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -62,33 +63,60 @@
         </div>
       </div>
     </nav>
+=======
+{% extends "base.html" %}
+>>>>>>> backend
 
-<!-- Clima -->
+{% block barra %}
+<!-- Barra de navegacion -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbar-toggler">
+      <a class="navbar-brand" href="#">
+        <img src="/static/imagenes/aicm.png" width="400" fill="black">
+      </a>
+      <!-- Buscador/Input -->
+      <section class="buscador-input">
+        <h2 class="seccion-titulo texto-negro" id="busca-info"></h2>
+        <h3 class="seccion-descripcion" id="porfa-info"></h3>
+        <h3 class="seccion-descripcion"><br></h3>
+        {% block url %} <form action="{{ url_for('climat') }}" method="get"> {% endblock %}
+          <div class="buscador-input-container">
+            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
+            <button type="submit" class="search-icon"></button>
+          </div>
+        </form>
+      </section>
+</nav>
+{% endblock %}
+
+{% block vacio %}
+<!-- CLima -->
 <section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
   <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
   <div class="container text-center perfiles-contenedor">
     <div class="row">
-      <!-- Clima -->
+    {% block icono %}
+      <!-- Icono -->
       <div class="col">
         <div class="clima">
-          <h3 class="seccion-descripcion">Clima</h3>
-          <!-- Cuadro de texto para mostrar el clima -->
-          <div id="cuadro-clima" style="border: 1px solid #000; padding: 10px; margin-top: 20px; height: 200px;">
             {% if weather_data %}
               {% if weather_data == "Ciudad no encontrada" %}
                 <p>{{ weather_data }}</p>
               {% else %}
-                <p>Temperatura: {{ weather_data.temperature }}</p>
-                <p>Presión: {{ weather_data.pressure }}</p>
-                <p>Humedad: {{ weather_data.humidity }}</p>
-                <p>Descripción: {{ weather_data.description }}</p>
-              {% endif %}
-            {% else %}
-              Aquí aparecerá la información del clima.
-            {% endif %}
-          </div>
+                <img src="{{ weather_data.icon_url }}" alt="Icono del clima">
+                {% endif %}
+                      {% else %}
+                      Aquí aparecerá la información del clima.
+                      {% endif %}               
         </div>
       </div>
+<<<<<<< HEAD
 <!-- Recomendaciones -->
 <div class="col">
     <div class="recomendaciones">
@@ -103,30 +131,55 @@
     </div>
 </div>
 
-</section>
-
-    </section>
-
-    <!-- Pie de página (footer) -->
-    <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center"> 
-      <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
-        <a href="https://x.com/aicm_mx?s=11" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-twitter-x"></i>
-        </a>
-        <a href="https://www.instagram.com/aicm_mx?igsh=Z2RxenZucjQwaGg0" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/share/njMKVqFQNWRqs77J/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-facebook"></i>
-        </a>
-        <a href="https://www.aicm.com.mx/aicm_en/contact" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-globe2"></i>
-        </a>
-        <a href="mailto:comentarios@aicm.com.mx" target="_blank" rel="noopener noreferrer">
-          <i class="bi bi-envelope"></i>
-        </a>
+=======
+      {% endblock %}
+      {% block clima %}
+      <!-- Clima -->
+      <div class="col">
+        <div class="clima">
+            <h3 class="seccion-descripcion"></h3>
+            {% if weather_data %}
+              {% if weather_data == "Ciudad no encontrada" %}
+                <p>{{ weather_data }}</p>
+              {% else %}
+                <p><br></p>
+                <p><br></p>
+                <h3 class="seccion-datos"><strong>Temperatura:</strong> {{ weather_data.temperature }}</h3>
+                <h3 class="seccion-datos"><strong>Mínima:</strong> {{ weather_data.temp_min }}</h3>
+                <h3 class="seccion-datos"><strong>Máxima:</strong> {{ weather_data.temp_max }}</h3>
+                <h3 class="seccion-datos"><strong>Viento:</strong> {{ weather_data.wind_speed }} dirección {{ weather_data.wind_deg }}</h2>
+                {% endif %}
+                      {% else %}
+                      Aquí aparecerá la información del clima.
+                      {% endif %}               
+        </div>
       </div>
-    </footer>
-  </body>
-</html>
+      <!-- Extras -->
+      <div class="col">
+        <div class="recomendaciones">
+          {% if weather_data %}
+                      {% if weather_data == "Ciudad no encontrada" %}
+                      <p>{{ weather_data }}</p>
+                      {% else %}
+                      <p><br></p>
+                      <p><br></p>
+                      <h3 class="seccion-datos"><strong>Visibilidad:</strong> {{ weather_data.visibility }}</h3>
+                      <h3 class="seccion-datos"><strong>Nubosidad:</strong> {{ weather_data.cloudiness }}</h3>
+                      <h3 class="seccion-datos"><strong>Amanecer:</strong> {{ weather_data.sunrise }} UTC</h3>
+                      <h3 class="seccion-datos"><strong>Anochecer:</strong> {{ weather_data.sunset }} UTC</h3>
+                      {% endif %}
+                      {% else %}
+                      Aquí aparecerá la información del clima.
+                      {% endif %}
+                    </div>
+                    
+        </div>
+      {% endblock %}
+  </div>
+>>>>>>> backend
+</section>
+{% endblock %}
 
+{% block java %}
+<script src="static/idiomas/clima.js"></script>
+{% endblock %}
