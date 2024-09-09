@@ -40,25 +40,7 @@ def climat():
     
     return render_template('clima.html', weather_data=weather_data, city_name=city_name)
 
-<<<<<<< HEAD
-    print(f"Wikidata Results: {wikidata_results}")
-    print(f"Weather Data: {weather_data}")
-
-    # Renderizar la plantilla con los datos obtenidos
-    return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=wikidata_results)
-
-
-
-    # Renderizar la plantilla con los datos obtenidos
-    return render_template('clima.html', weather_data=weather_data, city_name=city_name, curiosities=curiosities)
-
-
-
-    
-@app.route('/pasajeros/clima', methods=['GET'])
-=======
 @app.route('/pasajeros/climapa', methods=['GET'])
->>>>>>> backend
 def climap():
     city_name = request.args.get('city_name')
 
