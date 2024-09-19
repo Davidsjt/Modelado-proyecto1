@@ -20,27 +20,27 @@ def load_iata_data(file_path):
 
 def map_iata_to_city(iata_code, iata_to_city):
     """
-    Maps an IATA code to a city name using a provided dictionary.
+    Asigna un código IATA a un nombre de ciudad utilizando un diccionario proporcionado.
 
     Args:
         iata_code (str): The IATA code to map.
-        iata_to_city (dict): The dictionary mapping IATA codes to city names.
+        iata_to_city (dict): El diccionario que relaciona los códigos IATA con los nombres de las ciudades.
 
     Returns:
-        str or None: The city name if found, otherwise None.
+        str or None: El nombre de ciudad es encontrado, otro None.
     """
     return iata_to_city.get(iata_code.upper(), None)
 
 def get_closest_city_name(user_input, city_list):
     """
-    Finds the closest matching city name from a list of valid city names.
+    Encuentra el nombre de ciudad más cercano de una lista de nombres de ciudades válidos.
 
     Args:
-        user_input (str): The user input city name to correct.
-        city_list (list): The list of valid city names.
+        user_input (str): El imput de city name corregido.
+        city_list (list): La lista de ciudades validas.
 
     Returns:
-        str: The closest matching city name.
+        str: EL match mas cercano de city name.
     """
     # Find the closest match from the list of valid city names
     closest_match = process.extractOne(user_input, city_list, score_cutoff=80)  # Use a threshold for match confidence
