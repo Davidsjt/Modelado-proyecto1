@@ -37,6 +37,10 @@ def climat():
             city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data = obtener_clima(city_name)
+
+    # Redirigir a la página de error si no se encuentra la ciudad
+    if weather_data == "Ciudad no encontrada":
+        return render_template('error.html', city_name=city_name)
     
     return render_template('clima.html', weather_data=weather_data, city_name=city_name)
 
@@ -58,10 +62,13 @@ def climap():
             city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data_pasajeros = obtener_clima_pasajeros(city_name)
-    
+
+    # Redirigir a la página de error si no se encuentra la ciudad
+    if weather_data_pasajeros == "Ciudad no encontrada":
+        return render_template('error.html', city_name=city_name)
+
     return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 

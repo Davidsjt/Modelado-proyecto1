@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block barra %}
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbar-toggler">
+      <a class="navbar-brand" href="#">
+        <img src="/static/imagenes/aicm.png" width="400" fill="black">
+      </a>
+      <!-- Buscador/Input -->
+      <section class="buscador-input">
+        <h2 style="font-size: 1.2em; font-weight: normal;" id="busca-info">Buscar otra ciudad</h2>
+        <form action="{{ url_for('climat') }}" method="get">
+          <div class="buscador-input-container">
+            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
+            <button type="submit" class="search-icon"></button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block vacio %}
+<!-- Mensaje de error -->
+<section class="error-mensaje" style="text-align: center;">
+  <h2 class="seccion-titulo texto-negro">Ciudad no encontrada</h2>
+  <p>Lo sentimos, no hemos podido encontrar la ciudad "{{ city_name }}".</p>
+  <p>Por favor, intenta buscar otra ciudad.</p>
+</section>
+{% endblock %}
