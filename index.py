@@ -40,7 +40,7 @@ def climat():
 
     # Redirigir a la página de error si no se encuentra la ciudad
     if weather_data == "Ciudad no encontrada":
-        return render_template('error.html', city_name=city_name)
+        return render_template('error.html', city_name=city_name, context='tripulacion')
     
     return render_template('clima.html', weather_data=weather_data, city_name=city_name)
 
@@ -65,10 +65,9 @@ def climap():
 
     # Redirigir a la página de error si no se encuentra la ciudad
     if weather_data_pasajeros == "Ciudad no encontrada":
-        return render_template('error.html', city_name=city_name)
+        return render_template('error.html', city_name=city_name, context='pasajeros')
 
     return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
