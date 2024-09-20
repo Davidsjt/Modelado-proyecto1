@@ -2,10 +2,15 @@ from flask import Flask, request, render_template
 from backend.city_data_utils import load_iata_data, map_iata_to_city, get_closest_city_name, hex_to_iata
 from backend.weather_api import obtener_clima
 from backend.weatherpasa_api import obtener_clima_pasajeros
+import re  # Importamos re para validar el input
 
 app = Flask(__name__)
 
 iata_to_city, valid_cities = load_iata_data('static/iata_cities.csv')
+
+# Función que valida si el input contiene solo letras
+def is_valid_city_name(city_name):
+    return re.match("^[A-Za-záéíóúÁÉÍÓÚ\s]+$", city_name)
 
 @app.route('/')
 def inicio():
@@ -23,8 +28,9 @@ def pasajeros():
 def climat():
     city_name = request.args.get('city_name')
 
-    if not city_name:
-        return render_template('clima.html', weather_data=None, city_name=None)
+    # Si no hay city_name o el input no es válido, redirigir a la página de error
+    if not city_name or not is_valid_city_name(city_name):
+        return render_template('error.html', city_name=city_name, context='tripulacion', error="Nombre de ciudad no válido. Por favor, ingresa solo letras.")
 
     hex_city_iata = hex_to_iata(city_name, iata_to_city)
     if hex_city_iata:
@@ -41,15 +47,16 @@ def climat():
     # Redirigir a la página de error si no se encuentra la ciudad
     if weather_data == "Ciudad no encontrada":
         return render_template('error.html', city_name=city_name, context='tripulacion')
-    
+
     return render_template('clima.html', weather_data=weather_data, city_name=city_name)
 
 @app.route('/pasajeros/climapa', methods=['GET'])
 def climap():
     city_name = request.args.get('city_name')
 
-    if not city_name:
-        return render_template('climapa.html', weather_data_pasajeros=None, city_name=None)
+    # Si no hay city_name o el input no es válido, redirigir a la página de error
+    if not city_name or not is_valid_city_name(city_name):
+        return render_template('error.html', city_name=city_name, context='pasajeros', error="Nombre de ciudad no válido. Por favor, ingresa solo letras.")
 
     hex_city_iata = hex_to_iata(city_name, iata_to_city)
     if hex_city_iata:
