@@ -11,15 +11,40 @@ class TestCityDataUtils(unittest.TestCase):
         cls.sample_data = pd.read_csv('static/Sample.csv')
 
     def test_map_iata_to_city(self):
-        # Mapeo IATA
-        self.assertEqual(map_iata_to_city('MEX', self.iata_to_city), 'Ciudad de Mexico')
+    # Mapeo IATA
+        self.assertEqual(map_iata_to_city('MEX', self.iata_to_city), 'Ciudad de México')
         self.assertEqual(map_iata_to_city('OAX', self.iata_to_city), 'Oaxaca')
-        self.assertIsNone(map_iata_to_city('XYZ', self.iata_to_city))  # Prueba de fallo
+        self.assertEqual(map_iata_to_city('CUN', self.iata_to_city), 'Cancún')
+        self.assertEqual(map_iata_to_city('GDL', self.iata_to_city), 'Guadalajara')
+        self.assertEqual(map_iata_to_city('MTY', self.iata_to_city), 'Monterrey')
+        self.assertEqual(map_iata_to_city('PVR', self.iata_to_city), 'Puerto Vallarta')
+        self.assertEqual(map_iata_to_city('SJD', self.iata_to_city), 'San José del Cabo')
+        self.assertEqual(map_iata_to_city('VER', self.iata_to_city), 'Veracruz')
+        self.assertEqual(map_iata_to_city('HUX', self.iata_to_city), 'Huatulco')
+        self.assertEqual(map_iata_to_city('PBC', self.iata_to_city), 'Puebla')
+        self.assertEqual(map_iata_to_city('MTY', self.iata_to_city), 'Monterrey')
+    
+    # Prueba de fallo
+        self.assertIsNone(map_iata_to_city('XYZ', self.iata_to_city))
 
     def test_get_closest_city_name(self):
-        # Correccion ortográfica
+    # Corrección ortográfica
         self.assertEqual(get_closest_city_name('Ne York', self.valid_cities), 'New York')
         self.assertEqual(get_closest_city_name('Montery', self.valid_cities), 'Monterrey')
+        self.assertEqual(get_closest_city_name('Monterye', self.valid_cities), 'Monterrey')
+        self.assertEqual(get_closest_city_name('Monterey', self.valid_cities), 'Monterrey')
+        self.assertEqual(get_closest_city_name('Londres', self.valid_cities), 'London')
+        self.assertEqual(get_closest_city_name('Berlín', self.valid_cities), 'Berlin')
+        self.assertEqual(get_closest_city_name('París', self.valid_cities), 'Paris')
+        self.assertEqual(get_closest_city_name('Barcelna', self.valid_cities), 'Barcelona')
+        self.assertEqual(get_closest_city_name('Tokio', self.valid_cities), 'Tokyo')
+        self.assertEqual(get_closest_city_name('Los Ángles', self.valid_cities), 'Los Angeles')
+        self.assertEqual(get_closest_city_name('Madris', self.valid_cities), 'Madrid')
+        self.assertEqual(get_closest_city_name('Cancún', self.valid_cities), 'Cancun')  # Sin tilde
+        self.assertEqual(get_closest_city_name('Guadalajra', self.valid_cities), 'Guadalajara')
+        self.assertEqual(get_closest_city_name('Cdmx', self.valid_cities), 'Ciudad de México')
+        
+    # Caso donde no hay coincidencias
         self.assertEqual(get_closest_city_name('UnknownCity', self.valid_cities), 'UnknownCity')  # Debe regresar el valor original si no hay coincidencias
 
     def test_hex_to_iata(self):
