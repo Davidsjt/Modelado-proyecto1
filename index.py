@@ -2,15 +2,10 @@ from flask import Flask, request, render_template, redirect, url_for
 from backend.city_data_utils import load_iata_data, map_iata_to_city, get_closest_city_name, hex_to_iata
 from backend.weather_api import obtener_clima
 from backend.weatherpasa_api import obtener_clima_pasajeros
-import re  # Importamos re para validar el input
 
 app = Flask(__name__)
 
 iata_to_city, valid_cities = load_iata_data('static/iata_cities.csv')
-
-# Función que valida si el input contiene solo letras
-def is_valid_city_name(city_name):
-    return re.match("^[A-Za-záéíóúÁÉÍÓÚ\s]+$", city_name)
 
 @app.route('/')
 def inicio():
