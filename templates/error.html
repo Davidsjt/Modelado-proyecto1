@@ -17,9 +17,9 @@
       <section class="buscador-input">
         <h2 style="font-size: 1.2em; font-weight: normal;" id="busca-info">Buscar otra ciudad</h2>
         <!-- Aquí seleccionamos la URL correcta según el contexto -->
-        <form action="{% if context == 'tripulacion' %}{{ url_for('climat') }}{% elif context == 'pasajeros' %}{{ url_for('climap') }}{% endif %}" method="get">
+        <form action="{% if context == 'tripulacion' %}{{ url_for('climat') }}{% elif context == 'pasajeros' %}{{ url_for('climap') }}{% else %}{{ url_for('inicio') }}{% endif %}" method="get">
           <div class="buscador-input-container">
-            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
+            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." maxlength="15" tabindex="0" required class="form-control" id="city-input">
             <button type="submit" class="search-icon"></button>
           </div>
         </form>
@@ -38,3 +38,23 @@
 </section>
 {% endblock %}
 
+{% block java %}
+<script>
+    // Capitalizar la primera letra del input
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('city-input');
+        input.addEventListener('input', function() {
+            const value = this.value;
+            if (value.length > 0) {
+                this.value = value.charAt(0).toUpperCase() + value.slice(1);
+            }
+
+            // Validación adicional para el número de caracteres
+            if (value.length > 15) {
+                alert('El nombre de la ciudad no puede tener más de 15 caracteres.');
+                this.value = this.value.slice(0, 15); // Recorta el texto a 15 caracteres si se excede
+            }
+        });
+    });
+</script>
+{% endblock %}
