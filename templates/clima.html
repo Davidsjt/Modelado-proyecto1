@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block nubecitas %}
+<link rel="icon" type="image/x-icon" href="/static/imagenes/nubes.png">
+{% endblock %}
 
 {% block barra %}
 <!-- Barra de navegacion -->
@@ -15,9 +18,7 @@
       </a>
       <!-- Buscador/Input -->
       <section class="buscador-input">
-        <h2 class="seccion-titulo texto-negro" id="busca-info"></h2>
-        <h3 class="seccion-descripcion" id="porfa-info"></h3>
-        <h3 class="seccion-descripcion"><br></h3>
+        <p><br></p>
         {% block url %} <form action="{{ url_for('climat') }}" method="get"> {% endblock %}
           <div class="buscador-input-container">
             <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
@@ -30,68 +31,156 @@
 
 {% block vacio %}
 <!-- CLima -->
-<section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
+<section id="perfiles" class="perfiles-recientes d-flex flex-column" style="text-align: center;">
   <h2 class="seccion-titulo texto-negro">Clima en {{ city_name }}</h2>
   <div class="container text-center perfiles-contenedor">
     <div class="row">
-    {% block icono %}
-      <!-- Icono -->
-      <div class="col">
-        <div class="clima">
-            {% if weather_data %}
-              {% if weather_data == "Ciudad no encontrada" %}
-                <p>{{ weather_data }}</p>
-              {% else %}
-                <img src="{{ weather_data.icon_url }}" alt="Icono del clima">
-                {% endif %}
-                      {% else %}
-                      Aquí aparecerá la información del clima.
-                      {% endif %}               
-        </div>
-      </div>
-      {% endblock %}
       {% block clima %}
       <!-- Clima -->
-      <div class="col">
-        <div class="clima">
-            <h3 class="seccion-descripcion"></h3>
-            {% if weather_data %}
-              {% if weather_data == "Ciudad no encontrada" %}
-                <p>{{ weather_data }}</p>
-              {% else %}
-                <p><br></p>
-                <p><br></p>
-                <h3 class="seccion-datos"><strong>Temperatura:</strong> {{ weather_data.temperature }}</h3>
-                <h3 class="seccion-datos"><strong>Mínima:</strong> {{ weather_data.temp_min }}</h3>
-                <h3 class="seccion-datos"><strong>Máxima:</strong> {{ weather_data.temp_max }}</h3>
-                <h3 class="seccion-datos"><strong>Viento:</strong> {{ weather_data.wind_speed }} dirección {{ weather_data.wind_deg }}</h2>
-                {% endif %}
-                      {% else %}
-                      Aquí aparecerá la información del clima.
-                      {% endif %}               
+      {% if weather_data %}
+       {% if weather_data == "Ciudad no encontrada" %}
+         <p>{{ weather_data }}</p>
+       {% else %}
+      <div class="row m-2 p-2 justify-content-center">
+        <div class="col-4 m-2 p-2 ">
+          <div class="icono-clima">
+            <img src="{{ weather_data.icon_url }}" width="250px" alt="Icono del clima">
+          </div>
+        </div>
+        <div class="col m-2 p-2">
+          <div>
+            <div class="row">
+              <div class="col">
+                <h2 class="seccion-datos"> {{ weather_data.temperature}}</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="texto">
+                <p> {{ weather_data.description }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col m-2 p-2 textoInformativo">
+      
+            <div class="icono">
+              <i class="bi bi-thermometer-high"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Temperatura Máxima</p>
+              <p> {{ weather_data.temp_max }}</p>
+            </div>
+      
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+      
+            <div class="icono">
+              <i class="bi bi-thermometer"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Temperatura Mínima</p>
+              <p> {{weather_data.temp_min}} </p>
+            </div>
+      
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+            <div class="icono">
+              <i class="bi bi-clouds-fill"></i>
+            </div>
+        
+            <div class="texto">
+              <p> Visibilidad </p>
+              <p> {{weather_data.visibility}} </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col m-2 p-2 textoInformativo">
+            <div class="icono">
+              <i class="bi bi-droplet-fill"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Humedad</p>
+              <p> {{ weather_data.humidity }} </p>
+            </div>
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+            <div class="icono">
+              <i class="bi bi-cloud-fill"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Nubosidad</p>
+              <p> {{weather_data.cloudiness }} </p>
+            </div>
+      
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+      
+            <div class="icono">
+              <i class="bi bi-compass-fill"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Presión</p>
+              <p> {{ weather_data.pressure }} </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m-2 p-2 textoInformativo">
+            <div class="icono">
+              <i class="bi bi-wind"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Viento</p>
+              <p> {{ weather_data.wind_speed }} </p>
+            </div>
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+            <div class="icono">
+              <i class="bi bi-cloud-haze2-fill"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Dirección del viento</p>
+              <p> {{weather_data.wind_deg }} </p>
+            </div>
+      
+          </div>
+      
+          <div class="col m-2 p-2 textoInformativo">
+      
+            <div class="icono">
+              <i class="bi bi-cloud-rain-heavy-fill"></i>
+            </div>
+      
+            <div class="texto">
+              <p>Lluvia</p>
+              <p> {{ weather_data.rain_info }} </p>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- Extras -->
-      <div class="col">
-        <div class="recomendaciones">
-          {% if weather_data %}
-                      {% if weather_data == "Ciudad no encontrada" %}
-                      <p>{{ weather_data }}</p>
-                      {% else %}
-                      <p><br></p>
-                      <p><br></p>
-                      <h3 class="seccion-datos"><strong>Visibilidad:</strong> {{ weather_data.visibility }}</h3>
-                      <h3 class="seccion-datos"><strong>Nubosidad:</strong> {{ weather_data.cloudiness }}</h3>
-                      <h3 class="seccion-datos"><strong>Amanecer:</strong> {{ weather_data.sunrise }} UTC</h3>
-                      <h3 class="seccion-datos"><strong>Anochecer:</strong> {{ weather_data.sunset }} UTC</h3>
-                      {% endif %}
-                      {% else %}
-                      Aquí aparecerá la información del clima.
-                      {% endif %}
-                    </div>
-                    
-        </div>
+       {% endif %}
+      {% else %}
+      Aquí aparecerá la información del clima.
+      {% endif %}
       {% endblock %}
+    </div>
   </div>
 </section>
 {% endblock %}
@@ -99,3 +188,13 @@
 {% block java %}
 <script src="static/idiomas/clima.js"></script>
 {% endblock %}
+
+{% if weather_data %}
+              {% if weather_data == "Ciudad no encontrada" %}
+                <p>{{ weather_data }}</p>
+              {% else %}
+
+              {% endif %}
+              {% else %}
+              Aquí aparecerá la información del clima.
+              {% endif %}               

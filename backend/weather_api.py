@@ -41,6 +41,9 @@ def obtener_clima(city_or_iata_code):
         # Extraer la visibilidad 
         visibility = weather_response.get("visibility", "N/A")
 
+        #Extraer probabilidad de lluvia
+        rain_info = weather_response.get('rain',{}).get('1h',0)
+
         # Extraer la nubosidad (porcentaje de cielo cubierto por nubes)
         cloud_info = weather_response.get("clouds", {})
         cloudiness = cloud_info.get("all", "N/A")
@@ -61,11 +64,6 @@ def obtener_clima(city_or_iata_code):
         else:
             sunset_time = "N/A"  # Si no está disponible
 
-        # Extraer las coordenadas (longitud y latitud) de la ciudad
-        coordinates = weather_response.get("coord", {})
-        longitude = coordinates.get("lon", "N/A")
-        latitude = coordinates.get("lat", "N/A")
-
         # Construir un diccionario con todos los datos relevantes del clima
         weather_data = {
             "temperature": f"{current_temperature_celsius:.2f}°C",
@@ -83,8 +81,7 @@ def obtener_clima(city_or_iata_code):
             "sunrise": sunrise_time,
             "sunset": sunset_time,
             "country": country,
-            "longitude": longitude,
-            "latitude": latitude
+            "rain" : f"{rain_info}"
         }
     else:
         # Si la ciudad no se encuentra, devolver un mensaje de error

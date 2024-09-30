@@ -1,12 +1,12 @@
 from flask import Flask, request, render_template
-from backend.city_data_utils import load_iata_data, map_iata_to_city, get_closest_city_name, hex_to_iata
+#from backend.city_data_utils import load_iata_data, map_iata_to_city, get_closest_city_name, hex_to_iata
 from backend.weather_api import obtener_clima
 from backend.weatherpasa_api import obtener_clima_pasajeros
 import re  # Importamos re para validar el input
 
 app = Flask(__name__)
 
-iata_to_city, valid_cities = load_iata_data('static/iata_cities.csv')
+#iata_to_city, valid_cities = load_iata_data('static/iata_cities.csv')
 
 # Función que valida si el input contiene solo letras
 def is_valid_city_name(city_name):
@@ -32,15 +32,15 @@ def climat():
     if not city_name or not is_valid_city_name(city_name):
         return render_template('error.html', city_name=city_name, context='tripulacion', error="Nombre de ciudad no válido. Por favor, ingresa solo letras.")
 
-    hex_city_iata = hex_to_iata(city_name, iata_to_city)
-    if hex_city_iata:
-        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
-    else:
-        mapped_city = map_iata_to_city(city_name, iata_to_city)
-        if mapped_city:
-            city_name = mapped_city
-        else:
-            city_name = get_closest_city_name(city_name, valid_cities)
+#    hex_city_iata = hex_to_iata(city_name, iata_to_city)
+#    if hex_city_iata:
+#        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
+#    else:
+#        mapped_city = map_iata_to_city(city_name, iata_to_city)
+#        if mapped_city:
+#            city_name = mapped_city
+#        else:
+#            city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data = obtener_clima(city_name)
 
@@ -58,15 +58,15 @@ def climap():
     if not city_name or not is_valid_city_name(city_name):
         return render_template('error.html', city_name=city_name, context='pasajeros', error="Nombre de ciudad no válido. Por favor, ingresa solo letras.")
 
-    hex_city_iata = hex_to_iata(city_name, iata_to_city)
-    if hex_city_iata:
-        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
-    else:
-        mapped_city = map_iata_to_city(city_name, iata_to_city)
-        if mapped_city:
-            city_name = mapped_city
-        else:
-            city_name = get_closest_city_name(city_name, valid_cities)
+#    hex_city_iata = hex_to_iata(city_name, iata_to_city)
+#    if hex_city_iata:
+#        city_name = map_iata_to_city(hex_city_iata, iata_to_city)
+#    else:
+#        mapped_city = map_iata_to_city(city_name, iata_to_city)
+#        if mapped_city:
+#            city_name = mapped_city
+#        else:
+#            city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data_pasajeros = obtener_clima_pasajeros(city_name)
 
