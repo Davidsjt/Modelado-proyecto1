@@ -10,7 +10,7 @@
     <form action="{{ url_for('climat') }}" method="get"> 
     {% endblock %}
         <div class="buscador-input-container">
-            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0" maxlength="15" id="city-input">
+            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0" maxlength="20" required style="text-transform: capitalize;">
             <button type="submit" class="search-icon"></button>
         </div>
     </form>
@@ -19,16 +19,9 @@
 
 {% block java %}  
     <script src="static/idiomas/buscador.js"></script>
-    <script>
-        // Función para capitalizar la primera letra del input
-        document.getElementById('city-input').addEventListener('input', function() {
-            const value = this.value;
-            if (value.length > 0) {
-                this.value = value.charAt(0).toUpperCase() + value.slice(1);
-            }
-        });
-    </script>
 {% endblock %}
+
+
 
 
   
