@@ -1,8 +1,11 @@
+import os
 import requests
+from dotenv import load_dotenv
 from datetime import datetime
 
 # Tu clave de API de OpenWeather
-api_key = "cc8f7bbf129d916c4b40ad83b402512d"
+load_dotenv()
+api_key = os.getenv('OPENWEATHER_API_KEY')
 
 # Función para obtener el clima dado un nombre de ciudad o un código IATA
 def obtener_clima_pasajeros(city_or_iata_code):
@@ -56,6 +59,10 @@ def obtener_clima_pasajeros(city_or_iata_code):
         lon = coord.get("lon", "N/A")
         lat = coord.get("lat", "N/A")
 
+     # Obtener datos de lluvia si están presentes
+        rain = weather_response.get("rain", {})
+        rain_3h = rain.get("3h", 0)  # Lluvia en las últimas 3 horas (en mm)
+
         weather_data_pasajeros = {
             "temperature": f"{current_temperature_celsius:.2f}°C",
             "feels_like": f"{feels_like_celsius:.2f}°C",
@@ -73,7 +80,8 @@ def obtener_clima_pasajeros(city_or_iata_code):
             "sunset": sunset_time,
             "country": country,
             "longitude": lon,
-            "latitude": lat
+            "latitude": lat,
+            "rain_3h": f"{rain_3h} mm" if rain_3h != 0 else "No hay lluvia"
         }
     else:
         weather_data_pasajeros = "Ciudad no encontrada"
