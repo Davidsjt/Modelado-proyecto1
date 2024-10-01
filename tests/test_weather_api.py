@@ -1,91 +1,93 @@
 import unittest
 from unittest.mock import patch
-import requests
-from backend.weather_api import obtener_clima  # Asegúrate de que esta sea la ruta correcta a la función
+from backend.weather_api import obtener_clima
 
 class TestWeatherAPI(unittest.TestCase):
 
+    @patch('backend.weather_api.os.getenv', return_value='mock_api_key')
     @patch('backend.weather_api.requests.get')
-    def test_obtener_clima_valid_city(self, mock_get):
-        # Simulación de una respuesta válida de OpenWeather para la ciudad de "London"
+    def test_obtener_clima_exitoso(self, mock_get, mock_env):
+        # Simular una respuesta exitosa de la API de OpenWeather
         mock_response = {
             "cod": 200,
             "main": {
                 "temp": 293.15,
                 "feels_like": 290.15,
-                "temp_min": 291.15,
+                "temp_min": 290.15,
                 "temp_max": 295.15,
-                "pressure": 1012,
-                "humidity": 75
+                "pressure": 1013,
+                "humidity": 78
             },
             "weather": [
                 {
-                    "description": "cielo despejado",
+                    "description": "cielo claro",
                     "icon": "01d"
                 }
             ],
             "wind": {
-                "speed": 4.12,
-                "deg": 240
+                "speed": 3.09,
+                "deg": 150
             },
             "visibility": 10000,
-            "clouds": {"all": 0},
+            "clouds": {
+                "all": 0
+            },
             "sys": {
-                "country": "GB",
-                "sunrise": 1600413600,
-                "sunset": 1600459200
+                "country": "MX",
+                "sunrise": 1633072800,
+                "sunset": 1633116000
             },
             "coord": {
-                "lon": -0.1257,
-                "lat": 51.5085
+                "lon": -99.13,
+                "lat": 19.43
             },
-            "rain": {}
+            "rain": {
+                "3h": 0
+            }
         }
 
+        # Configurar el mock para devolver la respuesta simulada
+        mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = mock_response
 
-        # Llamar a la función con la ciudad "London"
-        result = obtener_clima("London")
+        # Llamar a la función y verificar los datos
+        resultado = obtener_clima("Ciudad de México")
+        self.assertEqual(resultado["temperature"], "20.00°C")
+        self.assertEqual(resultado["feels_like"], "17.00°C")
+        self.assertEqual(resultado["temp_min"], "17.00°C")
+        self.assertEqual(resultado["temp_max"], "22.00°C")
+        self.assertEqual(resultado["pressure"], "1013 hPa")
+        self.assertEqual(resultado["humidity"], "78%")
+        self.assertEqual(resultado["description"], "Cielo claro")
+        self.assertEqual(resultado["icon_url"], "http://openweathermap.org/img/wn/01d@4x.png")
+        self.assertEqual(resultado["wind_speed"], "3.09 m/s")
+        self.assertEqual(resultado["wind_deg"], "150°")
+        self.assertEqual(resultado["visibility"], "10000 m")
+        self.assertEqual(resultado["cloudiness"], "0%")
+        self.assertEqual(resultado["sunrise"], "12:00:00")
+        self.assertEqual(resultado["sunset"], "00:00:00")
+        self.assertEqual(resultado["country"], "MX")
+        self.assertEqual(resultado["longitude"], -99.13)
+        self.assertEqual(resultado["latitude"], 19.43)
+        self.assertEqual(resultado["rain_3h"], "No hay lluvia")
 
-        # Verificar que los datos retornados sean los esperados
-        self.assertEqual(result['temperature'], "20.00°C")
-        self.assertEqual(result['feels_like'], "17.00°C")
-        self.assertEqual(result['temp_min'], "18.00°C")
-        self.assertEqual(result['temp_max'], "22.00°C")
-        self.assertEqual(result['pressure'], "1012 hPa")
-        self.assertEqual(result['humidity'], "75%")
-        self.assertEqual(result['description'], "Cielo despejado")
-        self.assertEqual(result['country'], "GB")
-        self.assertEqual(result['longitude'], "-0.1257")
-        self.assertEqual(result['latitude'], "51.5085")
-        self.assertEqual(result['wind_speed'], "4.12 m/s")
-        self.assertEqual(result['wind_deg'], "240°")
-        self.assertEqual(result['cloudiness'], "0%")
-        self.assertEqual(result['rain_3h'], "No hay lluvia")
-
+    @patch('backend.weather_api.os.getenv', return_value='mock_api_key')
     @patch('backend.weather_api.requests.get')
-    def test_obtener_clima_invalid_city(self, mock_get):
-        # Simulación de una respuesta de error de OpenWeather para una ciudad no válida
-        mock_response = {"cod": "404", "message": "city not found"}
+    def test_obtener_clima_ciudad_no_encontrada(self, mock_get, mock_env):
+        # Simular una respuesta de error (ciudad no encontrada)
+        mock_response = {
+            "cod": "404",
+            "message": "city not found"
+        }
+
+        # Configurar el mock para devolver la respuesta simulada
+        mock_get.return_value.status_code = 404
         mock_get.return_value.json.return_value = mock_response
 
-        # Llamar a la función con una ciudad no válida
-        result = obtener_clima("InvalidCity")
-
-        # Verificar que la función retorne el mensaje adecuado
-        self.assertEqual(result, "Ciudad no encontrada")
-
-    @patch('backend.weather_api.requests.get')
-    def test_obtener_clima_api_key_error(self, mock_get):
-        # Simulación de una respuesta de error por falta de API Key
-        mock_response = {"cod": "401", "message": "Invalid API key"}
-        mock_get.return_value.json.return_value = mock_response
-
-        # Llamar a la función con un nombre de ciudad
-        result = obtener_clima("London")
-
-        # Verificar que la función maneje el error adecuadamente
-        self.assertEqual(result, "Ciudad no encontrada")
+        # Llamar a la función y verificar el resultado de error
+        resultado = obtener_clima("CiudadDesconocida")
+        self.assertEqual(resultado, "Ciudad no encontrada")
 
 if __name__ == '__main__':
     unittest.main()
+
