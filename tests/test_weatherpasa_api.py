@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+from datetime import datetime
 from backend.weatherpasa_api import obtener_clima_pasajeros
 
 class TestWeatherAPI(unittest.TestCase):
@@ -49,6 +50,10 @@ class TestWeatherAPI(unittest.TestCase):
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = mock_response
 
+        # Calcular las horas del amanecer y atardecer a partir de los timestamps
+        sunrise = datetime.utcfromtimestamp(1633072800).strftime('%H:%M:%S')
+        sunset = datetime.utcfromtimestamp(1633116000).strftime('%H:%M:%S')
+
         # Llamar a la función y verificar los datos
         resultado = obtener_clima_pasajeros("Ciudad de México")
         self.assertEqual(resultado["temperature"], "20.00°C")
@@ -63,8 +68,8 @@ class TestWeatherAPI(unittest.TestCase):
         self.assertEqual(resultado["wind_deg"], "150°")
         self.assertEqual(resultado["visibility"], "10000 m")
         self.assertEqual(resultado["cloudiness"], "0%")
-        self.assertEqual(resultado["sunrise"], "12:00:00")
-        self.assertEqual(resultado["sunset"], "00:00:00")
+        self.assertEqual(resultado["sunrise"], sunrise)  # Usar la hora calculada
+        self.assertEqual(resultado["sunset"], sunset)    # Usar la hora calculada
         self.assertEqual(resultado["country"], "MX")
         self.assertEqual(resultado["longitude"], -99.13)
         self.assertEqual(resultado["latitude"], 19.43)
@@ -78,7 +83,7 @@ class TestWeatherAPI(unittest.TestCase):
             "message": "city not found"
         }
 
-        # Configurar el mock para devolver la respuesta simulada
+        # Devolver la respuesta simulada
         mock_get.return_value.status_code = 404
         mock_get.return_value.json.return_value = mock_response
 
@@ -88,4 +93,5 @@ class TestWeatherAPI(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
