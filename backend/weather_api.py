@@ -48,7 +48,7 @@ def obtener_clima(city_or_iata_code):
 
         # Obtener datos de lluvia (últimas 3 horas)
         rain = weather_response.get("rain", {})
-        rain_3h = rain.get("3h", 0)
+        rain_1h = rain.get("1h", 0)
 
         # Obtener hora de amanecer y anochecer en formato legible
         sys = weather_response.get("sys", {})
@@ -82,7 +82,7 @@ def obtener_clima(city_or_iata_code):
             "country": country,
             "longitude": lon,
             "latitude": lat,
-            "rain_3h": f"{rain_3h} mm" if rain_3h != 0 else "No hay lluvia"
+            "rain_1h": f"{rain_1h} mm" if rain_1h != 0 else "No hay lluvia"
         }
     else:
         # Retornar mensaje de error si no se encuentran los datos
