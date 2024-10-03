@@ -1,9 +1,7 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from backend.city_data_utils import load_iata_data, map_iata_to_city, get_closest_city_name, hex_to_iata
 from backend.weather_api import obtener_clima
-from backend.data_api import query_wikidata
 from backend.weatherpasa_api import obtener_clima_pasajeros
-from backend.datapasa_api import query_wikidata_pasajeros
 
 app = Flask(__name__)
 
@@ -21,57 +19,88 @@ def tripulacion():
 def pasajeros():
     return render_template('pasajero.html')
 
+def validar_city_name(city_name):
+    # Verificar si la entrada es numérica
+    if city_name.isdigit():
+        # Redirigir a la página de error si la entrada es solo números
+        return redirect(url_for('error', city_name=city_name, context='tripulacion'))
+    
+    # Verificar si la longitud excede los 15 caracteres
+    if len(city_name) > 15:
+        # Redirigir a la página de error si la entrada es demasiado larga
+        return redirect(url_for('error', city_name=city_name, context='tripulacion'))
+    
+    return None
+
 @app.route('/tripulacion/clima', methods=['GET'])
 def climat():
     city_name = request.args.get('city_name')
 
     if not city_name:
-        return render_template('clima.html', weather_data=None, city_name=None, wikidata_results=None)
+        return render_template('clima.html', weather_data=None, city_name=None)
+
+    # Validar la entrada
+    error = validar_city_name(city_name)
+    if error:
+        return error  # Si es un error, redirigir a la plantilla de error
 
     hex_city_iata = hex_to_iata(city_name, iata_to_city)
     if hex_city_iata:
         city_name = map_iata_to_city(hex_city_iata, iata_to_city)
-
     else:
         mapped_city = map_iata_to_city(city_name, iata_to_city)
         if mapped_city:
             city_name = mapped_city
         else:
-            city_name = get_closest_city_name(city_name, valid_cities)            
+            city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data = obtener_clima(city_name)
-    
-    wikidata_results = query_wikidata(city_name)
 
-    return render_template('clima.html', weather_data=weather_data, city_name=city_name, wikidata_results=wikidata_results)
+    # Si no hay datos de clima o la ciudad no es encontrada, redirigir a la página de error
+    if not weather_data or weather_data == "Ciudad no encontrada":
+        return redirect(url_for('error', city_name=city_name, context='tripulacion'))
 
-    return render_template('clima.html', weather_data=weather_data, city_name=city_name, curiosities=curiosities)
+    return render_template('clima.html', weather_data=weather_data, city_name=city_name)
 
 @app.route('/pasajeros/climapa', methods=['GET'])
 def climap():
     city_name = request.args.get('city_name')
 
     if not city_name:
-        return render_template('climapa.html', weather_data_pasajeros=None, city_name=None, wikidata_results_pasajeros=None)
+        return render_template('climapa.html', weather_data_pasajeros=None, city_name=None)
+
+    # Validar la entrada
+    error = validar_city_name(city_name)
+    if error:
+        return error  # Si es un error, redirigir a la plantilla de error
 
     hex_city_iata = hex_to_iata(city_name, iata_to_city)
     if hex_city_iata:
         city_name = map_iata_to_city(hex_city_iata, iata_to_city)
-
     else:
         mapped_city = map_iata_to_city(city_name, iata_to_city)
         if mapped_city:
             city_name = mapped_city
         else:
-            city_name = get_closest_city_name(city_name, valid_cities)     
+            city_name = get_closest_city_name(city_name, valid_cities)
 
     weather_data_pasajeros = obtener_clima_pasajeros(city_name)
-    
-    wikidata_results_pasajeros = query_wikidata_pasajeros(city_name)
 
-    return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, wikidata_results_pasajeros=wikidata_results_pasajeros)
+    # Si no hay datos de clima o la ciudad no es encontrada, redirigir a la página de error
+    if not weather_data_pasajeros or weather_data_pasajeros == "Ciudad no encontrada":
+        return redirect(url_for('error', city_name=city_name, context='pasajeros'))
 
-    return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name, curiosities_pasajeros=curiosities_pasajeros)
+    return render_template('climapa.html', weather_data_pasajeros=weather_data_pasajeros, city_name=city_name)
+
+# Ruta para la página de error
+@app.route('/error')
+def error():
+    city_name = request.args.get('city_name')
+    context = request.args.get('context', 'tripulacion')  # Si no se pasa context, por defecto será 'tripulacion'
+    return render_template('error.html', city_name=city_name, context=context)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+

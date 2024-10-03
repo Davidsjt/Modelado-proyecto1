@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block nubecitas %}
+<link rel="icon" type="image/x-icon" href="/static/imagenes/triste.png">
+{% endblock %}
+
+{% block barra %}
+  <!-- Barra de navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+      <img src="/static/imagenes/aicm.png" width="400" fill="black">
+    </a>
+  </nav>
+{% endblock %}
+
+{% block vacio %}
+<!-- Mensaje de error -->
+<section class="error-mensaje" style="text-align: center;">
+  <img src="/static/imagenes/robot.png" width="100px" height="150px">  
+  <h2 class="seccion-titulo texto-negro">No hemos encontrado la ciudad "<strong>{{ city_name }}</strong>"</h2>
+  <p class="seccion-descripcion">Ha ocurrido un error, por favor intente buscar otra ciudad.</p>
+  <!-- Buscador/Input -->
+  <section class="buscador-input">
+    <!-- Aquí seleccionamos la URL correcta según el contexto -->
+    <form action="{% if context == 'tripulacion' %}{{ url_for('climat') }}{% elif context == 'pasajeros' %}{{ url_for('climap') }}{% endif %}" method="get">
+      <div class="buscador-input-container">
+        <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0" maxlength="20" style="text-transform: capitalize;">
+        <button type="submit" class="search-icon"></button>
+      </div>
+    </form>
+  </section>
+</section>
+{% endblock %}
+
+
