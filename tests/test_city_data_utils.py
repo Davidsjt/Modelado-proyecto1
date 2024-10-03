@@ -47,7 +47,6 @@ class TestCityDataUtils(unittest.TestCase):
         self.assertEqual(get_closest_city_name('Montery', self.valid_cities), 'Monterrey') # Error común: falta de "r"
         self.assertEqual(get_closest_city_name('Monterye', self.valid_cities), 'Monterrey')
         self.assertEqual(get_closest_city_name('Monterey', self.valid_cities), 'Monterrey')       
-       
         self.assertEqual(get_closest_city_name('Puepla', self.valid_cities), 'Puebla')  # Error común: inversión de letras
 
     # Si la ciudad no se encuentra en la lista válida, debe regresar el valor original

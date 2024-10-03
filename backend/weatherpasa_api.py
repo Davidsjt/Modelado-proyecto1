@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from datetime import datetime
+from backend.cache import get_from_cache, set_to_cache  # Importar funciones del módulo cache
 
 # Cargar las variables de entorno
 load_dotenv()
@@ -11,6 +12,12 @@ api_key = os.getenv('OPENWEATHER_API_KEY')  # Clave API de OpenWeather
 def obtener_clima_pasajeros(city_or_iata_code):
     if city_or_iata_code is None:
         return "Ciudad no encontrada"
+   
+ # Verificar si la ciudad ya está en caché
+    cached_data, _ = get_from_cache(city_or_iata_code)
+    if cached_data:
+        print("Usando datos en caché")
+        return cached_data
 
     # Construir la URL para la solicitud a OpenWeather
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -87,6 +94,6 @@ def obtener_clima_pasajeros(city_or_iata_code):
         # Retornar mensaje de error si no se encuentran los datos
         weather_data_pasajeros = "Ciudad no encontrada"
 
+     # Almacenar los datos en el caché compartido
+    set_to_cache(city_or_iata_code, weather_data_pasajeros)
     return weather_data_pasajeros
-
-
