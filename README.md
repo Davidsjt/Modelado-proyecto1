@@ -1,10 +1,8 @@
-# Modelado-proyecto1
-Equipo Maravilla haciendo maravillas
 # Aplicación de Clima
 
 ## Integrantes del Equipo
-* Flores Arriola Rafael Edson -
-* Ortega Medina David -
+* Flores Arriola Rafael Edson - 423118018
+* Ortega Medina David - 319111866
 * Rivera Soto Aline Daniela -320333035
 
 ## Descripción
@@ -46,21 +44,24 @@ Para ejecutar la aplicación, se debe tener  Python y Flask instalados. Luego, s
    $ git clone https://github.com/Davidsjt/Modelado-proyecto1.git
 ```
 
-2. Agregar la clave de la API de OpenWeatherMap en el archivo `weather_api.py`:
+2. Agregar la clave de la API de OpenWeatherMap en el archivo `.env`:
 
-``` python
-     api_key = '-----' (Línea de codigo: 5)
 ```
-
+ OPENWEATHER_API_KEY=tu_clave_api_aqui
+```
 
 ## Pasos para ejecutar la página:
 - Ejecutar la aplicación Flask:
 Linux:
 ```bash
     $ cd Modelado-proyecto1
+    $ export FLASK_APP=index
     $ flask --app index run
 ```
-Esto ejecutara un 'http://localhost:5000', esto lo tendras que abir desde tu navegador
+Microsoft:
+Entrar a Visual Studio Code y abrir el archivo 'index.py', una vez parado ahí darle click al play que se muestra en la esquina superior derecha.
+
+Esto ejecutara un 'http://localhost:5000', dicho link lo tendras que abir desde tu navegador
 
 
 ## Funcionalidades Principales
@@ -73,13 +74,12 @@ La aplicación ofrece las siguientes funcionalidades:
 
 
 ## API de OpenWeatherMap
-Para obtener datos meteorológicos, la aplicación se conecta a la API de OpenWeatherMap. Debes proporcionar tu propia clave de API en el archivo `weather_api.py` para que funcione correctamente.
+Para obtener datos meteorológicos, la aplicación se conecta a la API de OpenWeatherMap. Debes proporcionar tu propia clave de API en el archivo `.env` para que funcione correctamente.
 
 ## Documentación: 
 
 - Python: https://docs.python.org/
 - Flask: https://flask.palletsprojects.com/ 
-
 
 
 # Roles de trabajo
