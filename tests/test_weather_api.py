@@ -43,7 +43,7 @@ class TestWeatherAPI(unittest.TestCase):
                 "lat": 19.43
             },
             "rain": {
-                "3h": 0
+                "1h": 0
             }
         }
 
@@ -74,7 +74,7 @@ class TestWeatherAPI(unittest.TestCase):
         self.assertEqual(resultado["country"], "MX")
         self.assertEqual(resultado["longitude"], -99.13)
         self.assertEqual(resultado["latitude"], 19.43)
-        self.assertEqual(resultado["rain_3h"], "No hay lluvia")
+        self.assertEqual(resultado["rain_1h"], "No hay lluvia")
 
     @patch('backend.weather_api.os.getenv', return_value='mock_api_key')
     @patch('backend.weather_api.requests.get')
