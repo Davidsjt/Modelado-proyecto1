@@ -18,6 +18,10 @@ body {
   background-color: #133855;
 }
 
+.seccion-clara {
+  color: black;
+  background-color: #88a7d0;
+}
 
 .seccion-titulo {
   font-size: 2rem;
@@ -31,8 +35,10 @@ body {
 }
 
 .seccion-datos {
-  font-size: 1.5rem;
-  color: #02152b;
+  font-size: 3rem;
+  color: #00203b;
+  font-family: 'Anton';
+  font-style: normal;
 }
 
 
@@ -270,3 +276,135 @@ footer {
   }
 }
 
+/* CLIMA */
+.icono {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  margin-left: 5px;
+  color: #00203b;
+}
+
+.icono i {
+  font-size: 60px;
+}
+
+.textoInformativo {
+  display: flex;
+  align-items: center;
+}
+
+.texto {
+  flex: 1;
+  text-align: center;
+}
+
+.texto p {
+  font-size: 1.5rem;
+  color: #00203b;
+  font-family: 'Ubuntu' ,  sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  align-items: center;
+}
+
+.contenedor {
+  position: absolute; 
+}
+
+.icono-clima img {
+  margin-left: 200px;
+  margin-top: -95px;
+}
+
+/* Aerolineas(Carrusel) */
+.aerolineas {
+  padding: 40px 40px 80px 40px;
+}
+
+.aerolineas .carousel {
+  max-width: 600px;
+  margin-left: 20px;
+}
+
+.carousel-item {
+  height: 300px;
+}
+
+.carousel-item .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.aerolinea-imagen {
+  height: 80px;
+  width: 250px;
+}
+
+.aerolinea-texto {
+  max-width: 70%;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.aerolinea-info {
+  font-weight: bold;
+  text-align: center;
+}
+
+.aerolinea-info p {
+  margin-bottom: 0;
+}
+
+.aerolinea-footer .linea {
+  font-size: 1.2rem;
+  font-family: 'Ubuntu';
+}
+
+/* Llegar */
+.llegar {
+  padding: 40px 40px 60px 40px;
+}
+
+.llegar .col {
+  padding: 20px;
+  border: 2px solid #8080804d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.2s ease-in;
+}
+
+.llegar .columna:hover {
+  color: black;
+  background-color: rgb(221, 229, 182);
+}
+
+.llegar i {
+  font-size: 2.5rem;
+  color: rgb(202, 210, 197);
+  background-color: #1e477a;
+  padding: 10px 17px;
+  border-radius: 50%;
+}
+
+.llegar-titulo {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.badges-contenedor {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.badge {
+  margin: 5px;
+}

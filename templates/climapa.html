@@ -2,45 +2,112 @@
 
 {% block url %} <form action="{{ url_for('climap') }}" method="get"> {% endblock %}
 
-{% block icono %}
-<!-- Icono -->
-<div class="col">
-  <div class="clima">
-      {% if weather_data_pasajeros %}
-        {% if weather_data_pasajeros == "Ciudad no encontrada" %}
-          <p>{{ weather_data_pasajeros }}</p>
-        {% else %}
-          <img src="{{ weather_data_pasajeros.icon_url }}" alt="Icono del clima">
-          {% endif %}
-                {% else %}
-                Aquí aparecerá la información del clima.
-                {% endif %}               
-  </div>
-</div>
-{% endblock %}
-
 {% block clima %}
 <!-- Clima -->
-<div class="col">
-  <div class="recomendaciones">
-    {% if weather_data_pasajeros %}
-                {% if weather_data_pasajeros == "Ciudad no encontrada" %}
-                <p>{{ weather_data_pasajeros }}</p>
-                {% else %}
-                <br><br><br><br><br><br>
-                <p><strong>Temperatura:</strong> {{ weather_data_pasajeros.temperature }}</p>
-                <p><strong>Mínima:</strong> {{ weather_data_pasajeros.temp_min }}</p>
-                <p><strong>Máxima:</strong> {{ weather_data_pasajeros.temp_max }}</p>
-                <p><strong>Descripción:</strong> {{ weather_data_pasajeros.description }}</p>
-                <p><strong>Sensación térmica:</strong> {{ weather_data_pasajeros.feels_like }}</p>
-                <p><strong>Viento:</strong> {{ weather_data_pasajeros.wind_speed }} dirección {{ weather_data_pasajeros.wind_deg }}</p>
-                <p><strong>Amanecer:</strong> {{ weather_data_pasajeros.sunrise }} UTC</p>
-                <p><strong>Anochecer:</strong> {{ weather_data_pasajeros.sunset }} UTC</p>
-                {% endif %}
-                {% else %}
-                Aquí aparecerá la información del clima.
-                {% endif %}
-              </div>
-              
-  </div>
+{% if weather_data_pasajeros %}
+   {% if weather_data_pasajeros == "Ciudad no encontrada" %}
+     <p>{{ weather_data_pasajeros }}</p>
+   {% else %}
+    <div class="row m-2 p-2 justify-content-center">
+      <div class="col-4 m-2 p-2 ">
+        <div class="icono-clima">
+          <img src="{{ weather_data_pasajeros.icon_url }}" width="250px" alt="Icono del clima">
+        </div>
+      </div>
+      <div class="col m-2 p-2">
+        <div>
+          <div class="row">
+            <div class="col">
+              <h2 class="seccion-datos"> {{ weather_data_pasajeros.temperature}}</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="texto">
+              <p> {{ weather_data_pasajeros.description }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col m-2 p-2 textoInformativo">
+    
+          <div class="icono">
+            <i class="bi bi-thermometer-high"></i>
+          </div>
+    
+          <div class="texto">
+            <p>Temperatura Máxima</p>
+            <p> {{ weather_data_pasajeros.temp_max }}</p>
+          </div>
+    
+        </div>
+    
+        <div class="col m-2 p-2 textoInformativo">
+    
+          <div class="icono">
+            <i class="bi bi-thermometer"></i>
+          </div>
+    
+          <div class="texto">
+            <p>Temperatura Mínima</p>
+            <p> {{weather_data_pasajeros.temp_min}} </p>
+          </div>
+    
+        </div>
+    
+        <div class="col m-2 p-2 textoInformativo">
+          <div class="icono">
+            <i class="bi bi-thermometer-sun"></i>
+          </div>
+    
+          <div class="texto">
+            <p> Sensación térmica </p>
+            <p> {{weather_data_pasajeros.feels_like}} </p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col m-2 p-2 textoInformativo">
+          <div class="icono">
+            <i class="bi bi-sunrise-fill"></i>
+          </div>
+    
+          <div class="texto">
+            <p>Amanecer</p>
+            <p> {{ weather_data_pasajeros.sunrise }} </p>
+          </div>
+        </div>
+    
+        <div class="col m-2 p-2 textoInformativo">
+          <div class="icono">
+            <i class="bi bi-sunset-fill"></i>
+          </div>
+    
+          <div class="texto">
+            <p>Anochecer</p>
+            <p> {{weather_data_pasajeros.sunset }} </p>
+          </div>
+    
+        </div>
+    
+        <div class="col m-2 p-2 textoInformativo">
+    
+          <div class="icono">
+            <i class="bi bi-cloud-rain-heavy-fill"></i>
+          </div>
+    
+          <div class="texto">
+            <p>Lluvia</p>
+              <p> {{ weather_data_pasajeros.rain_1h }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% endif %}
+{% else %}
+   Aquí aparecerá la información del clima.
+{% endif %}
+
 {% endblock %}

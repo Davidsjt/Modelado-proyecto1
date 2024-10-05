@@ -1,40 +1,41 @@
 {% extends "base.html" %}
 
+{% block nubecitas %}
+<link rel="icon" type="image/x-icon" href="/static/imagenes/triste.png">
+{% endblock %}
+
 {% block barra %}
-<!-- Barra de navegación -->
-<nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <div class="collapse navbar-collapse" id="navbar-toggler">
-      <a class="navbar-brand" href="#">
-        <img src="/static/imagenes/aicm.png" width="400" fill="black">
+  <!-- Barra de navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+      <img src="/static/imagenes/aicm.png" width="400" fill="black">
+    </a>
+    <!-- Boton de inicio -->
+    <div class="translate">
+      <a href="{{ url_for('inicio') }}">
+        <img src="\static\imagenes\inicio.png" width="50px">
       </a>
-      <!-- Buscador/Input -->
-      <section class="buscador-input">
-        <h2 style="font-size: 1.2em; font-weight: normal;" id="busca-info">Buscar otra ciudad</h2>
-        <!-- Aquí seleccionamos la URL correcta según el contexto -->
-        <form action="{% if context == 'tripulacion' %}{{ url_for('climat') }}{% elif context == 'pasajeros' %}{{ url_for('climap') }}{% endif %}" method="get">
-          <div class="buscador-input-container">
-            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
-            <button type="submit" class="search-icon"></button>
-          </div>
-        </form>
-      </section>
     </div>
-  </div>
-</nav>
+  </nav>
 {% endblock %}
 
 {% block vacio %}
 <!-- Mensaje de error -->
 <section class="error-mensaje" style="text-align: center;">
-  <h2 class="seccion-titulo texto-negro">Ciudad no encontrada</h2>
-  <p>Lo sentimos, no hemos podido encontrar la ciudad "<strong>{{ city_name }}</strong>".</p>
-  <p>Por favor, intenta buscar otra ciudad.</p>
+  <img src="/static/imagenes/robot.png" width="100px" height="150px">  
+  <h2 class="seccion-titulo texto-negro">No hemos encontrado la ciudad "<strong>{{ city_name }}</strong>"</h2>
+  <p class="seccion-descripcion">Ha ocurrido un error, por favor intente buscar otra ciudad.</p>
+  <!-- Buscador/Input -->
+  <section class="buscador-input">
+    <!-- Aquí seleccionamos la URL correcta según el contexto -->
+    <form action="{% if context == 'tripulacion' %}{{ url_for('climat') }}{% elif context == 'pasajeros' %}{{ url_for('climap') }}{% endif %}" method="get">
+      <div class="buscador-input-container">
+        <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0" maxlength="20" style="text-transform: capitalize;">
+        <button type="submit" class="search-icon"></button>
+      </div>
+    </form>
+  </section>
 </section>
 {% endblock %}
+
 

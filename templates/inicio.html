@@ -2,7 +2,7 @@
 
 {% block vacio %}
 <!-- Perfiles -->
-<section id="perfiles" class="perfiles-recientes seccion-clara d-flex flex-column" style="text-align: center;">
+<section id="perfiles" class="perfiles-recientes d-flex flex-column" style="text-align: center;">
   <h2 class="seccion-titulo texto-negro" id="bienvenida-info"></h2>
   <h3 class="seccion-descripcion" id="escoja-info"></h3>
   <div class="container text-center perfiles-contenedor">
@@ -35,6 +35,128 @@
           </div>
         </div>
       </div>
+</section>
+
+<!-- Check-in -->
+<section id="aerolineas" class="aerolineas seccion-clara">
+  <h2 class="seccion-titulo" id="duda"></h2>
+  <h3 class="seccion-descripcion" id="busca_aero"></h3>
+  <div class="container text-center perfiles-contenedor">
+    <div class="row">
+      <!-- Primer Carrusel -->
+      <div class="col">
+        <h2 class="seccion-titulo">Terminal 1</h2>
+        <div id="aerolineas-carrusel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container">
+                <a alt="Air Canada" href="https://www.aircanada.com/home/mx/es/aco/checkin"><img src="static/imagenes/aerolineas/aircanada.png" width="250px" height="125px" alt="Air Canada"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Air France" href="https://wwws.airfrance.com.mx/check-in"></a><img src="static/imagenes/aerolineas/airfrance.png" width="280px" height="180px" alt="Air France"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Volaris" href="https://cms.volaris.com/es/informacion-util/antes-de-tu-vuelo/haz-check-in/"><img src="static/imagenes/aerolineas/volaris.png" width="250px" height="125px" alt="Volaris"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Iberia" href="https://www.iberia.com/es/autocheckin-online/?language=es&market=es#!/ibcose"><img src="static/imagenes/aerolineas/iberia.png" width="250px" height="125px" alt="Iberia"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Avianca" href="https://checkinnew.avianca.com/Check-In?lang=ES"><img src="static/imagenes/aerolineas/avianca.png" width="250px" height="80px" alt="Avianca"></a>
+              </div>
+            </div> 
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Viva" href="https://www.vivaaerobus.com/es-mx/manage/find-booking"><img src="static/imagenes/aerolineas/viva.png" width="250px" height="125px" alt="Viva"></a>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#aerolineas-carrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#aerolineas-carrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div> 
+
+      <!-- Segundo Carrusel -->
+      <div class="col">
+        <h1 class="seccion-titulo">  Terminal 2</h1>
+        <div id="aerolineas2-carrusel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container">
+                <a alt="Aeromexico" href="https://aeromexico.com/es-mx/check-in"><img src="static/imagenes/aerolineas/amex.png" width="250px" height="100px" alt="Aeromexico"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Aeromexico Conect" href="https://aeromexico.com/es-mx/check-in"></a><img src="static/imagenes/aerolineas/amexco.png" width="270" height="80px" alt="Aeromexico Conect"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="LATAM" href="https://www.latamairlines.com/mx/es/check-in"><img class="aerolinea-imagen" src="static/imagenes/aerolineas/latam.png" alt="LATAM"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Delta Airlines" href="https://es.delta.com/mx/es"><img src="static/imagenes/aerolineas/delta.png" width="200px" height="120px" alt="Delta Airlines"></a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <a alt="Copa Airlines" href="https://checkin.copaair.com/"><img src="static/imagenes/aerolineas/copa.png" width="250px" height="120px" alt="Copa Airlines"></a>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#aerolineas2-carrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#aerolineas2-carrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>    
+</section>
+
+<!-- Llegar -->
+<section class="llegar">
+  <h2 class="seccion-titulo" id="pregunta"></h2>
+  <h3 class="seccion-descripcion" id="seleccione"></h3>
+  <p><br></p>
+  <div class="container text-center">
+    <div class="row">
+      <!-- Google Maps T1 -->
+      <div class="col">
+        <a href="https://maps.app.goo.gl/x63xnzeX5Af5gmwx5"><i class="bi bi-geo-alt-fill"></i></a>
+        <p class="llegar-titulo">Terminal 1</p>
+        <p>Google Maps</p>
+      </div>
+      <!-- Google Maps T2 -->
+      <div class="col">
+        <a href="https://maps.app.goo.gl/JfX8Wb6kFKf3fB9S6"><i class="bi bi-geo-alt-fill"></i></a>
+        <p class="llegar-titulo"> Terminal 2</p>
+        <p>Google Maps</p>
+      </div>
+    </div>
+  </div>
+  <p><br></p>
 </section>
 
 {% endblock %}

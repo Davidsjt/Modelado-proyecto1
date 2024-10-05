@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
- <!-- Buscador/Input -->
- {% block vacio %}
+<!-- Buscador/Input -->
+{% block vacio %}
 <section class="buscador-input">
     <h2 class="seccion-titulo texto-negro" id="busca-info"></h2>
     <h3 class="seccion-descripcion" id="porfa-info"></h3>
     <h3 class="seccion-descripcion"><br></h3>
-   {% block url %} <form action="{{ url_for('climat') }}" method="get"> {% endblock %}
+    {% block url %} 
+    <form action="{{ url_for('climat') }}" method="get"> 
+    {% endblock %}
         <div class="buscador-input-container">
-            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0">
+            <input type="text" name="city_name" placeholder="Veamos la condición climática en..." tabindex="0" maxlength="20" required style="text-transform: capitalize;">
             <button type="submit" class="search-icon"></button>
         </div>
     </form>
 </section>
 {% endblock %}
 
-  {% block java %}  
-      <script src="static/idiomas/buscador.js"></script>
-  {% endblock %} 
+{% block java %}  
+    <script src="static/idiomas/buscador.js"></script>
+{% endblock %}
+
+
+
+
+  
