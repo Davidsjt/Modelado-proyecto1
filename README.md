@@ -6,7 +6,7 @@
 * Rivera Soto Aline Daniela -320333035
 
 ## Descripción
-Esta es una aplicación web desarrollada con Flask que permite a los usuarios buscar información el clima en las ciudadesde origen y destino. La aplicación se conecta a una base de datos y utiliza la API de OpenWeatherMap para obtener datos meteorológicos en tiempo real.
+Esta es una aplicación web desarrollada con Flask que permite a los usuarios buscar información el clima en las ciudades en tiempo real. La aplicación utiliza la API de OpenWeatherMap para obtener datos meteorológicos en tiempo real.
 
 ## Estructura de Carpetas
 El proyecto se organiza en las siguientes carpetas:
@@ -49,6 +49,8 @@ Para ejecutar la aplicación, se debe tener  Python y Flask instalados. Luego, s
 ```
  OPENWEATHER_API_KEY=tu_clave_api_aqui
 ```
+   - En algunos sistemas de carpetas como en Fedora el archivo `.env` no aparece después de clonarlo, sin embargo al abrirlo en una IDE el archivo se encuentra ahí.
+   - Si no llegara a estar, crear un archivo en la altura de index.py, llamarlo `.env`  y colocar estaa linea `OPENWEATHER_API_KEY=tu_clave_api_aqui` (con tu clave api)
 
 ## Pasos para ejecutar la página:
 - Ejecutar la aplicación Flask:
@@ -70,7 +72,7 @@ La aplicación ofrece las siguientes funcionalidades:
 - Búsqueda de clima por ciudad de origen y destino.
 - Búsqueda de clima por IATA.
 - Búsqueda de clima por número de ticket(temporalmente solo con samples).
-- Visualización de datos meteorológicos en tiempo real de las ciudades de origen y destino.
+- Visualización de datos meteorológicos en tiempo real de las ciudades.
 
 
 ## API de OpenWeatherMap
